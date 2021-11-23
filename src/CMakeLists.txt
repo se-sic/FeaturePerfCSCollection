@@ -1,1 +1,2 @@
 add_subdirectory(SingleLocalSimple)
+add_subdirectory(SingleLocalMultipleRegions)
