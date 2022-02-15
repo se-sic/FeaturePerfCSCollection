@@ -12,6 +12,11 @@ inline void sleep_for_secs(unsigned Secs) {
   std::this_thread::sleep_for(std::chrono::seconds(Secs));
 }
 
+
+inline void sleep_for_nsecs(unsigned nsecs) {
+  std::this_thread::sleep_for(std::chrono::nanoseconds(nsecs));
+}
+
 } // namespace fpcsc
 
 #endif // FPCSC_PERFUTIL_SLEEP_H
