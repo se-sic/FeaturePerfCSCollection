@@ -2,10 +2,7 @@
 #include "fpcsc/perf_util/feature_cmd.h"
 
 #include <string>
-
-static void performAction(void *Pointer) {
-  asm volatile("" : : "g"(Pointer) : "memory");
-}
+#include <cassert>
 
 int main(int argc, char *argv[]) {
 
@@ -14,23 +11,12 @@ int main(int argc, char *argv[]) {
   std::cout << "Number of Iterations: " << NumIterations << "\n";
 
   long SleepFor;
-  bool Sleep = fpcsc::getFeatureValue(argc, argv, std::string("--sleepns"), &SleepFor);
+  fpcsc::getFeatureValue(argc, argv, std::string("--sleepns"), &SleepFor);
   std::cout << "Nanoseconds to sleep: " << SleepFor << "\n";
 
-  int SomeValue = 0;
-  long int ActualIterations = 0;
-  for (; ActualIterations < NumIterations; ++ActualIterations) {
-    performAction (&SomeValue);
-
-    if (SomeValue != 0)
-      break;
-
-    if (Sleep) {
-      fpcsc::sleep_for_nsecs (SleepFor);
-    }
+  for (int i = 0; i < NumIterations; ++i) {
+    fpcsc::sleep_for_nsecs (SleepFor);
   }
-
-  std::cout << "Actual number of iterations: " << ActualIterations << "\n";
 
   return 0;
 }
