@@ -3,6 +3,7 @@
 
 #include <string>
 #include <stdlib.h>
+#include <exception>
 
 namespace fpcsc {
 
@@ -16,7 +17,7 @@ inline bool isFeatureEnabled(int argc, char* argv[], std::string FeatureName) {
   return false;
 }
 
-inline bool getFeatureValue (int argc, char* argv[], std::string FeatureName, long int *Value) {
+inline long getFeatureValue (int argc, char* argv[], std::string FeatureName) {
   int CurrentArg = 1;
   for (; CurrentArg < argc; ++CurrentArg) {
     if (argv[CurrentArg] == FeatureName) {
@@ -26,11 +27,9 @@ inline bool getFeatureValue (int argc, char* argv[], std::string FeatureName, lo
   }
 
   if (CurrentArg >= argc)
-    return false;
+    return -1;
 
-  *Value = strtol (argv[CurrentArg], NULL, 0);
-
-  return true;
+  return strtol (argv[CurrentArg], NULL, 0);
 }
 
 } // namespace fpcsc
