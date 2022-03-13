@@ -5,32 +5,38 @@
 #include <stdlib.h>
 #include <exception>
 
-namespace fpcsc {
-
-inline bool isFeatureEnabled(int argc, char* argv[], std::string FeatureName) {
-  for (int CurrentArg = 1; CurrentArg < argc; ++CurrentArg) {
-    if (argv[CurrentArg] == FeatureName) {
-      return true;
+namespace fpcsc
+{
+  inline bool isFeatureEnabled(int argc, char *argv[], std::string FeatureName)
+  {
+    for (int CurrentArg = 1; CurrentArg < argc; ++CurrentArg)
+    {
+      if (argv[CurrentArg] == FeatureName)
+      {
+        return true;
+      }
     }
+
+    return false;
   }
 
-  return false;
-}
-
-inline long getFeatureValue (int argc, char* argv[], std::string FeatureName) {
-  int CurrentArg = 1;
-  for (; CurrentArg < argc; ++CurrentArg) {
-    if (argv[CurrentArg] == FeatureName) {
-      ++CurrentArg;
-      break;
+  inline long getRequiredFeatureValue(int argc, char *argv[], std::string FeatureName)
+  {
+    int CurrentArg = 1;
+    for (; CurrentArg < argc; ++CurrentArg)
+    {
+      if (argv[CurrentArg] == FeatureName)
+      {
+        ++CurrentArg;
+        break;
+      }
     }
+
+    if (CurrentArg >= argc)
+      std::__throw_runtime_error(("Required Feature '" + FeatureName + "' is missing.").c_str());
+
+    return strtol(argv[CurrentArg], NULL, 0);
   }
-
-  if (CurrentArg >= argc)
-    return -1;
-
-  return strtol (argv[CurrentArg], NULL, 0);
-}
 
 } // namespace fpcsc
 
