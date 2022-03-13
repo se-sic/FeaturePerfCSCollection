@@ -5,11 +5,9 @@
 
 int main(int argc, char *argv[])
 {
-  // feature 'NumIterations'
   long NumIterations = fpcsc::getRequiredFeatureValue(argc, argv, std::string("--iterations"));
   std::cout << "Number of Iterations: " << NumIterations << "\n";
 
-  // feature 'SleepFor'
   long SleepFor = fpcsc::getRequiredFeatureValue(argc, argv, std::string("--sleepms"));
   std::cout << "Milliseconds to sleep: " << SleepFor << "\n";
 
