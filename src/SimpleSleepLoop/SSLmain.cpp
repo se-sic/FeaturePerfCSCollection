@@ -11,12 +11,10 @@ int main(int argc, char *argv[])
   long SleepFor = fpcsc::getRequiredFeatureValue(argc, argv, std::string("--sleepms"));
   std::cout << "Milliseconds to sleep: " << SleepFor << "\n";
 
-  for (int i = 0; i < NumIterations; ++i)
-  {
-    if (SleepFor > 0)
-    {
-      fpcsc::sleep_for_millisecs(SleepFor);
-    }
+  long i = 0;
+  while (i < NumIterations) {
+    fpcsc::sleep_for_millisecs(SleepFor);
+    ++i;
   }
 
   return 0;
