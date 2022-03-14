@@ -7,14 +7,11 @@ volatile long Counter;
 
 int main(int argc, char *argv[])
 {
-  long NumIterations = fpcsc::getRequiredFeatureValue(argc, argv, "--iterations");
-  if (NumIterations)
-    std::cout << "Number of Iterations: " << NumIterations << "\n";
+  long NumIterations = fpcsc::getFeatureValue(argc, argv, "--iterations");
+  long CountTo = fpcsc::getFeatureValue(argc, argv, "--count_to");
 
-  long CountTo = fpcsc::getRequiredFeatureValue(argc, argv, "--count_to");
-  if (CountTo)
-    std::cout << "In each iteration, count to: " << CountTo << "\n";
-
+  if (!NumIterations || !CountTo)
+    std::__throw_runtime_error("Required feature missing.");
 
   if (NumIterations)
     for (long i = 0; i < NumIterations; ++i)

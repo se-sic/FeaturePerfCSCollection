@@ -20,7 +20,7 @@ namespace fpcsc
     return false;
   }
 
-  inline long getRequiredFeatureValue(int argc, char *argv[], std::string FeatureName)
+  inline long getFeatureValue(int argc, char *argv[], std::string FeatureName)
   {
     int CurrentArg = 1;
     for (; CurrentArg < argc; ++CurrentArg)
@@ -33,7 +33,7 @@ namespace fpcsc
     }
 
     if (CurrentArg >= argc)
-      std::__throw_runtime_error(("Required Feature '" + FeatureName + "' is missing.").c_str());
+      return 0;
 
     return strtol(argv[CurrentArg], NULL, 0);
   }
