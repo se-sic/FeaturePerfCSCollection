@@ -10,11 +10,13 @@ int main(int argc, char *argv[])
   long NumIterations = fpcsc::getRequiredFeatureValue(argc, argv, "--iterations");
   long CountTo = fpcsc::getRequiredFeatureValue(argc, argv, "--count_to");
 
-  for (long i = 0; i < NumIterations; ++i)
-  {
-    for (Counter = 0; Counter < CountTo; ++Counter)
-      ;
-  }
+  if (NumIterations)
+    for (long i = 0; i < NumIterations; ++i)
+    {
+      if (CountTo)
+        for (Counter = 0; Counter < CountTo; ++Counter)
+          ;
+    }
 
   return 0;
 }
