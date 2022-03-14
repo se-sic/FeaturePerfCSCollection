@@ -11,12 +11,10 @@ int main(int argc, char *argv[])
   if (!NumIterations || !SleepFor)
     std::__throw_runtime_error("Required feature missing.");
 
-  if (NumIterations)
-    for (long i = 0; i < NumIterations; ++i)
-    {
-      if (SleepFor)
-        fpcsc::sleep_for_millisecs(SleepFor);
-    }
+  for (long i = 0; i < NumIterations; ++i)
+  {
+    fpcsc::sleep_for_millisecs(SleepFor);
+  }
 
   return 0;
 }

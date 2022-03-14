@@ -13,13 +13,11 @@ int main(int argc, char *argv[])
   if (!NumIterations || !CountTo)
     std::__throw_runtime_error("Required feature missing.");
 
-  if (NumIterations)
-    for (long i = 0; i < NumIterations; ++i)
-    {
-      if (CountTo)
-        for (Counter = 0; Counter < CountTo; ++Counter)
-          ;
-    }
+  for (long i = 0; i < NumIterations; ++i)
+  {
+    for (Counter = 0; Counter < CountTo; ++Counter)
+      ;
+  }
 
   return 0;
 }
