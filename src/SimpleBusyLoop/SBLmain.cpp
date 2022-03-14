@@ -8,12 +8,16 @@ volatile long Counter;
 int main(int argc, char *argv[])
 {
   long NumIterations = fpcsc::getFeatureValue(argc, argv, "--iterations");
+  long CountTo = fpcsc::getFeatureValue(argc, argv, "--count_to");
 
-  if (!NumIterations)
+  if (!NumIterations || !CountTo)
     std::__throw_runtime_error("Required feature missing.");
 
-  for (Counter = 0; Counter < NumIterations; ++Counter)
-    ;
+  for (long i = 0; i < NumIterations; ++i)
+  {
+    for (Counter = 0; Counter < CountTo; ++Counter)
+      ;
+  }
 
   return 0;
 }
