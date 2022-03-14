@@ -5,8 +5,6 @@
 #include <stdlib.h>
 #include <exception>
 
-#define FEATURE_MISSING -1
-
 namespace fpcsc
 {
   inline bool isFeatureEnabled(int argc, char *argv[], std::string FeatureName)
@@ -22,7 +20,7 @@ namespace fpcsc
     return false;
   }
 
-  inline long getFeatureValue(int argc, char *argv[], std::string FeatureName)
+  inline long getRequiredFeatureValue(int argc, char *argv[], std::string FeatureName)
   {
     int CurrentArg = 1;
     for (; CurrentArg < argc; ++CurrentArg)
@@ -35,7 +33,7 @@ namespace fpcsc
     }
 
     if (CurrentArg >= argc)
-      return FEATURE_MISSING;
+      std::__throw_runtime_error(("Required Feature '" + FeatureName + "' is missing.").c_str());
 
     return strtol(argv[CurrentArg], NULL, 0);
   }

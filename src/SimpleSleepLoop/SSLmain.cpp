@@ -5,29 +5,13 @@
 
 int main(int argc, char *argv[])
 {
-  std::string FeatureName = "--iterations";
-  long NumIterations = fpcsc::getFeatureValue(argc, argv, FeatureName);
+  long NumIterations = fpcsc::getRequiredFeatureValue(argc, argv, "--iterations");
+  long SleepFor = fpcsc::getRequiredFeatureValue(argc, argv, "--sleepms");
 
-  if (NumIterations == FEATURE_MISSING)
-    std::__throw_runtime_error(("Required Feature '" + FeatureName + "' is missing.").c_str());
-  
-  std::cout << "Number of Iterations: " << NumIterations << "\n";
-
-
-  FeatureName = "--sleepms";
-  long SleepFor = fpcsc::getFeatureValue(argc, argv, FeatureName);
-
-  if (SleepFor == FEATURE_MISSING)
-    std::__throw_runtime_error(("Required Feature '" + FeatureName + "' is missing.").c_str());
-
-  std::cout << "Milliseconds to sleep: " << SleepFor << "\n";
-
-
-  long i = 0;
-  while (i < NumIterations)
+  for (long i = 0; i < NumIterations; ++i)
   {
-    fpcsc::sleep_for_millisecs(SleepFor);
-    ++i;
+    if (SleepFor)
+      fpcsc::sleep_for_millisecs(SleepFor);
   }
 
   return 0;
