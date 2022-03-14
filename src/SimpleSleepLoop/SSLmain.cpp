@@ -6,7 +6,12 @@
 int main(int argc, char *argv[])
 {
   long NumIterations = fpcsc::getRequiredFeatureValue(argc, argv, "--iterations");
+  if (NumIterations)
+    std::cout << "Number of Iterations: " << NumIterations << "\n";
+
   long SleepFor = fpcsc::getRequiredFeatureValue(argc, argv, "--sleepms");
+  if (SleepFor)
+    std::cout << "Milliseconds to sleep: " << SleepFor << "\n";
 
   if (NumIterations)
     for (long i = 0; i < NumIterations; ++i)
