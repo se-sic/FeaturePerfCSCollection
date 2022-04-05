@@ -10,7 +10,7 @@ int main(int argc, char *argv[]) {
   long CountTo = fpcsc::getFeatureValue(argc, argv, "--count_to");
 
   if (!NumIterations || !CountTo) {
-    std::cerr << "Required feature missing.";
+    std::cerr << "Required feature missing." << "\n";
     return 1;
   }
 

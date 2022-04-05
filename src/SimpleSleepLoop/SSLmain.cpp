@@ -8,7 +8,7 @@ int main(int argc, char *argv[]) {
   long SleepFor = fpcsc::getFeatureValue(argc, argv, "--sleepms");
 
   if (!NumIterations || !SleepFor) {
-    std::cerr << "Required feature missing.";
+    std::cerr << "Required feature missing." << "\n";
     return 1;
   }
 
