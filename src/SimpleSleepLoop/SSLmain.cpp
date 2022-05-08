@@ -6,7 +6,7 @@
 
 int main(int argc, char *argv[]) {
   long NumIterations = fpcsc::getFeatureValue(argc, argv, "--iterations");
-  long SleepFor = fpcsc::getFeatureValue(argc, argv, "--sleepms");
+  long SleepFor = fpcsc::getFeatureValue(argc, argv, "--sleepns");
 
   if (!NumIterations || !SleepFor) {
     std::cerr << "Required feature missing." << "\n";
@@ -14,7 +14,7 @@ int main(int argc, char *argv[]) {
   }
 
   for (long i = 0; i < NumIterations; ++i) {
-    fpcsc::sleep_for_millisecs(SleepFor);
+    fpcsc::sleep_for_nanosecs(SleepFor);
   }
 
   return 0;
