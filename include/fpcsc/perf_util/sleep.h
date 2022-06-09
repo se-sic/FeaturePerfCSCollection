@@ -12,8 +12,8 @@ inline void sleep_for_secs(unsigned Secs) {
   std::this_thread::sleep_for(std::chrono::seconds(Secs));
 }
 
-inline void sleep_for_millisecs(unsigned millisecs) {
-  std::this_thread::sleep_for(std::chrono::milliseconds(millisecs));
+inline void sleep_for_nanosecs(unsigned millisecs) {
+  std::this_thread::sleep_for(std::chrono::nanoseconds(millisecs));
 }
 
 } // namespace fpcsc
