@@ -31,7 +31,7 @@ class FValue3 : public FeatureGroup {
 class FValueOther : public FeatureGroup {};
 
 int main(int argc, char *argv[]) {
-  FeatureGroup *feature;
+  FeatureGroup *feature = nullptr;
 
   if (fpcsc::isFeatureEnabled(argc, argv, std::string("--value1"))) {
     feature = new FValue1();
@@ -44,9 +44,12 @@ int main(int argc, char *argv[]) {
   }
 
 
-  feature->doWork(); // Feature dependent time cost
+  if (feature) {
+    feature->doWork(); // Feature dependent time cost
+
+    delete feature;
+  }
 
 
-  delete feature;
   return 0;
 }
