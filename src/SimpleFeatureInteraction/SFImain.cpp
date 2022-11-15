@@ -34,9 +34,9 @@ PackageData encrypt(PackageData Data) {
   return Data;
 }
 
-static bool __attribute__((feature_variable("UseEncryption"))) UseEncryption =
+static bool __attribute__((feature_variable("Encryption"))) UseEncryption =
     false;
-static bool __attribute__((feature_variable("UseCompression"))) UseCompression =
+static bool __attribute__((feature_variable("Compression"))) UseCompression =
     false;
 
 void loadConfigFromArgv(int argc, char *argv[]) {
