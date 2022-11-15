@@ -1,17 +1,16 @@
-#include "fpcsc/perf_util/sleep.h"
 #include "fpcsc/perf_util/feature_cmd.h"
+#include "fpcsc/perf_util/sleep.h"
 
-#include <string>
 #include <algorithm>
+#include <string>
 
-static void send(void *Data) {
-  asm volatile("" : : "g"(Data) : "memory");
-}
+static void send(void *Data) { asm volatile("" : : "g"(Data) : "memory"); }
 
 class PackageData {
 public:
   PackageData() = default;
-  PackageData(std::string Data) : Data{std::move(Data)}, Size{this->Data.size()} {}
+  PackageData(std::string Data)
+      : Data{std::move(Data)}, Size{this->Data.size()} {}
 
   std::string Data;
   unsigned long Size;
@@ -35,8 +34,10 @@ PackageData encrypt(PackageData Data) {
   return Data;
 }
 
-static bool UseEncryption = false;
-static bool UseCompression =  false;
+static bool __attribute__((feature_variable("UseEncryption"))) UseEncryption =
+    false;
+static bool __attribute__((feature_variable("UseCompression"))) UseCompression =
+    false;
 
 void loadConfigFromArgv(int argc, char *argv[]) {
   if (fpcsc::isFeatureEnabled(argc, argv, std::string("--enc"))) {
@@ -46,7 +47,6 @@ void loadConfigFromArgv(int argc, char *argv[]) {
     UseCompression = true;
   }
 }
-
 
 void sendPackage(PackageData Data) {
   if (UseCompression) {
@@ -67,7 +67,7 @@ void sendPackage(PackageData Data) {
   std::puts(Data.Data.c_str());
 }
 
-int main(int argc, char *argv[] ) {
+int main(int argc, char *argv[]) {
 
   loadConfigFromArgv(argc, argv);
 
