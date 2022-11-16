@@ -18,19 +18,19 @@ public:
 
 PackageData compress(PackageData Data) {
   Data.Data = Data.Data.substr(0, Data.Data.size() / 2);
-  fpcsc::sleep_for_secs(3);
+  fpcsc::busy_sleep_for_secs(3);
   return Data;
 }
 
 PackageData addPadding(PackageData Data) {
   Data.Data += "foopadbar";
-  fpcsc::sleep_for_secs(1);
+  fpcsc::busy_sleep_for_secs(1);
   return Data;
 }
 
 PackageData encrypt(PackageData Data) {
   std::reverse(Data.Data.begin(), Data.Data.end());
-  fpcsc::sleep_for_secs(5);
+  fpcsc::busy_sleep_for_secs(5);
   return Data;
 }
 
@@ -61,7 +61,7 @@ void sendPackage(PackageData Data) {
   }
 
   // Sending
-  fpcsc::sleep_for_secs(2);
+  fpcsc::busy_sleep_for_secs(2);
   send(&Data);
 
   std::puts(Data.Data.c_str());
