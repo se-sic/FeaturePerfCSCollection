@@ -1,0 +1,14 @@
+{
+	"backtraceGraph" : 
+	{
+		"commands" : [],
+		"files" : [],
+		"nodes" : []
+	},
+	"installers" : [],
+	"paths" : 
+	{
+		"build" : "src/SingleLocalMultipleRegions",
+		"source" : "src/SingleLocalMultipleRegions"
+	}
+}

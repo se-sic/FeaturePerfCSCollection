@@ -5,7 +5,7 @@ class __attribute__((feature_variable("FeatureGroup"))) FeatureGroup {
 public:
   virtual void doWork() { fpcsc::sleep_for_secs(5); }
 
-  virtual ~FeatureGroup() = default;
+  virtual ~FeatureGrexioup() = default;
 };
 
 class __attribute__((feature_variable("FValue1"))) FValue1
