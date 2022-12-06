@@ -1,14 +1,8 @@
 /home/aufrichtig/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/221.5080.224/bin/cmake/linux/bin/cmake -DCMAKE_BUILD_TYPE=Debug -DCMAKE_MAKE_PROGRAM=/home/aufrichtig/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/221.5080.224/bin/ninja/linux/ninja -G Ninja -S /home/aufrichtig/bachelor/FeaturePerfCSCollection -B /home/aufrichtig/bachelor/FeaturePerfCSCollection/cmake-build-debug
--- Adding test binary FeatureCallingFeature
--- Adding test binary SingleLocalSimple
--- Adding test binary SingleLocalMultipleRegions
--- Adding test binary MultiSharedMultipleRegions
--- Adding test binary SimpleFeatureInteraction
--- Adding test binary SimpleSleepLoop
--- Adding test binary SimpleBusyLoop
--- Adding test binary PerfDetectiveExample
--- Adding test binary FeatureVirtualInheritance
--- Adding test binary CollinearFeature
--- Configuring done
--- Generating done
--- Build files have been written to: /home/aufrichtig/bachelor/FeaturePerfCSCollection/cmake-build-debug
+CMake Error at src/CMakeLists.txt:10:
+  Parse error.  Expected a command name, got unquoted argument with text
+  "<<<<<<<".
+
+
+-- Configuring incomplete, errors occurred!
+See also "/home/aufrichtig/bachelor/FeaturePerfCSCollection/cmake-build-debug/CMakeFiles/CMakeOutput.log".
