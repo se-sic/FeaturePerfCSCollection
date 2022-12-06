@@ -70,7 +70,7 @@ int main(int argc, char *argv[]) {
   return 0;
 }
 /* Expected results:
- * {} = 2s
+ * {} = 4s
  * a = 6s
  * b = 6s
  * a, b = 2 + 6 + 2 + 4  = 14

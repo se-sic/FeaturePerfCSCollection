@@ -44,6 +44,7 @@ endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for each subdirectory.
+  include("/home/aufrichtig/bachelor/FeaturePerfCSCollection/cmake-build-debug/src/FeatureCallingFeature/cmake_install.cmake")
   include("/home/aufrichtig/bachelor/FeaturePerfCSCollection/cmake-build-debug/src/SingleLocalSimple/cmake_install.cmake")
   include("/home/aufrichtig/bachelor/FeaturePerfCSCollection/cmake-build-debug/src/SingleLocalMultipleRegions/cmake_install.cmake")
   include("/home/aufrichtig/bachelor/FeaturePerfCSCollection/cmake-build-debug/src/MultiSharedMultipleRegions/cmake_install.cmake")
@@ -52,6 +53,7 @@ if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   include("/home/aufrichtig/bachelor/FeaturePerfCSCollection/cmake-build-debug/src/SimpleBusyLoop/cmake_install.cmake")
   include("/home/aufrichtig/bachelor/FeaturePerfCSCollection/cmake-build-debug/src/PerfDetectiveExample/cmake_install.cmake")
   include("/home/aufrichtig/bachelor/FeaturePerfCSCollection/cmake-build-debug/src/FeatureVirtualInheritance/cmake_install.cmake")
+  include("/home/aufrichtig/bachelor/FeaturePerfCSCollection/cmake-build-debug/src/CollinearFeature/cmake_install.cmake")
 
 endif()
 
