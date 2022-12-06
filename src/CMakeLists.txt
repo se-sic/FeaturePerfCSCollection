@@ -8,4 +8,3 @@ add_subdirectory(SimpleBusyLoop)
 add_subdirectory(PerfDetectiveExample)
 add_subdirectory(FeatureVirtualInheritance)
 add_subdirectory(CollinearFeature)
-
