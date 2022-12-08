@@ -46,7 +46,7 @@ int main(int argc, char *argv[]) {
     fpcsc::sleep_for_secs(2);
 
   if(c && d)
-    fpcsc::sleep_for_secs(2);
+    fpcsc::sleep_for_secs(0);
 
   return 0;
 }
