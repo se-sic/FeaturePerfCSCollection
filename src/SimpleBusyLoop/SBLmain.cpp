@@ -31,7 +31,7 @@ int main(int argc, char *argv[]) {
     }
   }
 
-  fpcsc::busy_sleep_for_secs(2);
+  fpcsc::sleep_for_secs(2);
 
   return 0;
 }

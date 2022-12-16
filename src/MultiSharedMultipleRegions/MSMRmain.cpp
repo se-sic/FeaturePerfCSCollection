@@ -27,29 +27,29 @@ int main(int argc, char *argv[] ) {
   // Multiple regions related to --slow that take different amounts of time.
 
   if (Slow) {
-    fpcsc::busy_sleep_for_secs(5);
+    fpcsc::sleep_for_secs(5);
   } else {
-    fpcsc::busy_sleep_for_secs(3);
+    fpcsc::sleep_for_secs(3);
   }
 
-  fpcsc::busy_sleep_for_secs(2); // General waiting time
+  fpcsc::sleep_for_secs(2); // General waiting time
 
   if (HeaderFeature) {
-    fpcsc::busy_sleep_for_secs(3);
+    fpcsc::sleep_for_secs(3);
   } else {
-    fpcsc::busy_sleep_for_secs(1);
+    fpcsc::sleep_for_secs(1);
   }
 
-  fpcsc::busy_sleep_for_secs(2); // General waiting time
+  fpcsc::sleep_for_secs(2); // General waiting time
 
   if (ExternFeature) {
-    fpcsc::busy_sleep_for_secs(6);
+    fpcsc::sleep_for_secs(6);
   }
 
-  fpcsc::busy_sleep_for_secs(2); // General waiting time
+  fpcsc::sleep_for_secs(2); // General waiting time
 
   if (isCppFeatureEnabled()) {
-    fpcsc::busy_sleep_for_secs(3);
+    fpcsc::sleep_for_secs(3);
   }
 
   return 0;
