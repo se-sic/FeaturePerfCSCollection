@@ -4,21 +4,34 @@
 #include <iostream>
 #include <string>
 
-volatile long Counter;
+long __attribute__((feature_variable("NumIterations"))) NumIterations;
+long CountTo;
 
-int main(int argc, char *argv[]) {
-  long NumIterations = fpcsc::getFeatureValue(argc, argv, "--iterations");
-  long CountTo = fpcsc::getFeatureValue(argc, argv, "--count_to");
+bool parseParams(int argc, char *argv[]) {
+  NumIterations = fpcsc::getFeatureValue(argc, argv, "--iterations");
+  CountTo = fpcsc::getFeatureValue(argc, argv, "--count_to");
 
   if (!NumIterations || !CountTo) {
-    std::cerr << "Required feature missing." << "\n";
+    std::cerr << "Required feature missing."
+              << "\n";
+    return false;
+  }
+
+  return true;
+}
+
+int main(int argc, char *argv[]) {
+  if (!parseParams(argc, argv)) {
     return 1;
   }
 
   for (long i = 0; i < NumIterations; ++i) {
-    for (Counter = 0; Counter < CountTo; ++Counter) {
+    for (long Counter = 0; Counter < CountTo; ++Counter) {
+      asm volatile("" : "+g"(i), "+g"(Counter) : :); // prevent optimization
     }
   }
+
+  fpcsc::sleep_for_secs(2);
 
   return 0;
 }

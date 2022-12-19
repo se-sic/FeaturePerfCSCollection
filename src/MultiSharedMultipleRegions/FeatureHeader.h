@@ -1,9 +1,9 @@
 #ifndef FEATURE_HEADER_H
 #define FEATURE_HEADER_H
 
-extern bool ExternFeature;
+extern bool __attribute__((feature_variable("Extern"))) ExternFeature;
 
-static inline bool HeaderFeature = false;
+static inline bool __attribute__((feature_variable("Header"))) HeaderFeature = false;
 
 inline void enableExternFeature() {
   ExternFeature = true;
