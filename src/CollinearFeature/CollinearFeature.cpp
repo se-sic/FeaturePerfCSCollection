@@ -23,11 +23,12 @@ int main(int argc, char *argv[]) {
     d = true;
   }
 
+/*
   if ((c && !d) || (!c && d)){
     c = false;
     d = false;
   }
-
+*/
   fpcsc::sleep_for_secs(2); //spending time in base feature
 
   if(a)
