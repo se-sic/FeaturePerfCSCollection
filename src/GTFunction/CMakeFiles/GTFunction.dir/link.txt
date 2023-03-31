@@ -1,0 +1,1 @@
+/usr/bin/c++ CMakeFiles/GTFunction.dir/GTFunction.cpp.o -o ../../bin/GTFunction 

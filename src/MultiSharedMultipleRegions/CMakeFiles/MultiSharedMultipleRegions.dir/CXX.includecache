@@ -1,0 +1,40 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/scratch/messerig/FeaturePerfCSCollection/src/MultiSharedMultipleRegions/FeatureHeader.cpp
+FeatureHeader.h
+/scratch/messerig/FeaturePerfCSCollection/src/MultiSharedMultipleRegions/FeatureHeader.h
+
+/scratch/messerig/FeaturePerfCSCollection/src/MultiSharedMultipleRegions/FeatureHeader.h
+
+/scratch/messerig/FeaturePerfCSCollection/src/MultiSharedMultipleRegions/MSMRmain.cpp
+FeatureHeader.h
+/scratch/messerig/FeaturePerfCSCollection/src/MultiSharedMultipleRegions/FeatureHeader.h
+fpcsc/perf_util/sleep.h
+/scratch/messerig/FeaturePerfCSCollection/src/MultiSharedMultipleRegions/fpcsc/perf_util/sleep.h
+fpcsc/perf_util/feature_cmd.h
+/scratch/messerig/FeaturePerfCSCollection/src/MultiSharedMultipleRegions/fpcsc/perf_util/feature_cmd.h
+string
+-
+
+include/fpcsc/perf_util/feature_cmd.h
+exception
+-
+stdlib.h
+-
+string
+-
+
+include/fpcsc/perf_util/sleep.h
+chrono
+-
+iostream
+-
+thread
+-
+

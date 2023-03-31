@@ -1,0 +1,34 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/scratch/messerig/FeaturePerfCSCollection/src/FeatureCallingFeature/FeatureCallingFeature.cpp
+fpcsc/perf_util/feature_cmd.h
+/scratch/messerig/FeaturePerfCSCollection/src/FeatureCallingFeature/fpcsc/perf_util/feature_cmd.h
+fpcsc/perf_util/sleep.h
+/scratch/messerig/FeaturePerfCSCollection/src/FeatureCallingFeature/fpcsc/perf_util/sleep.h
+iostream
+-
+string
+-
+
+include/fpcsc/perf_util/feature_cmd.h
+exception
+-
+stdlib.h
+-
+string
+-
+
+include/fpcsc/perf_util/sleep.h
+chrono
+-
+iostream
+-
+thread
+-
+

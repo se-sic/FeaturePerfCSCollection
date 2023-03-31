@@ -1,0 +1,1 @@
+/usr/bin/c++ CMakeFiles/FeatureVirtualInheritance.dir/FVImain.cpp.o -o ../../bin/FeatureVirtualInheritance 

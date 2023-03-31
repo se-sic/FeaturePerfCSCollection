@@ -1,0 +1,22 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/scratch/messerig/FeaturePerfCSCollection/src/PerfDetectiveExample/PDEmain.cpp
+fpcsc/perf_util/sleep.h
+/scratch/messerig/FeaturePerfCSCollection/src/PerfDetectiveExample/fpcsc/perf_util/sleep.h
+cstdlib
+-
+
+include/fpcsc/perf_util/sleep.h
+chrono
+-
+iostream
+-
+thread
+-
+
