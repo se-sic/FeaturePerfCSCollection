@@ -2,7 +2,7 @@
 
 bool ExternFeature = false;
 
-static bool CppFeature = false;
+static bool __attribute__((feature_variable("Cpp"))) CppFeature = false;
 
 void enableCppFeature() {
   CppFeature = true;

@@ -6,7 +6,7 @@
 #include <string>
 
 int main(int argc, char *argv[] ) {
-  bool Slow = false;
+  bool __attribute__((feature_variable("Slow"))) Slow = false;
 
   if (fpcsc::isFeatureEnabled(argc, argv, std::string("--slow"))) {
     Slow = true;
