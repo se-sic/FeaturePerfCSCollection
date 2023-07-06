@@ -15,7 +15,7 @@ option(FPCSC_ENABLE_ALL
 )
 option(FPCSC_ENABLE_SRC "Enable source builds" OFF)
 
-include_directories(include/)
+include_directories(external/FeaturePerfUtilities/include/)
 
 if(FPCSC_ENABLE_SRC OR FPCSC_ENABLE_ALL)
   add_subdirectory(src)

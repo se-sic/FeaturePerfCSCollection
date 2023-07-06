@@ -1,7 +1,7 @@
 #include "FeatureHeader.h"
 
-#include "fpcsc/perf_util/feature_cmd.h"
-#include "fpcsc/perf_util/sleep.h"
+#include "fp_util/feature_cmd.h"
+#include "fp_util/sleep.h"
 
 #include <string>
 
