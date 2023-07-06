@@ -11,7 +11,7 @@ macro(ADD_PROJECT name)
          "Enable synthetic context senstivitiy cases study." OFF
   )
 
-  if(FPCSC_ENABLE_PROJECT_CONTEXTSENS_${NAME} OR FPCSC_ENABLE_ALL)
+  if(FPCSC_ENABLE_PROJECT_${NAME} OR FPCSC_ENABLE_ALL)
     message(STATUS "Adding project ${name}")
 
     add_subdirectory(${name})
