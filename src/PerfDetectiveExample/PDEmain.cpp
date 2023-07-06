@@ -5,7 +5,8 @@
 static int x2 = 0;
 
 int preCalculate(int z) {
-  if (x2 < 10) return 0;
+  if (x2 < 10)
+    return 0;
   return 1;
 }
 

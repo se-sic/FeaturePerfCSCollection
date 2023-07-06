@@ -1,11 +1,11 @@
 #include "FeatureHeader.h"
 
-#include "fpcsc/perf_util/sleep.h"
 #include "fpcsc/perf_util/feature_cmd.h"
+#include "fpcsc/perf_util/sleep.h"
 
 #include <string>
 
-int main(int argc, char *argv[] ) {
+int main(int argc, char *argv[]) {
   bool __attribute__((feature_variable("Slow"))) Slow = false;
 
   if (fpcsc::isFeatureEnabled(argc, argv, std::string("--slow"))) {
