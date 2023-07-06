@@ -7,7 +7,7 @@ endmacro(ADD_TEST_BINARY)
 macro(ADD_PROJECT name)
   string(TOUPPER ${name} NAME)
 
-  option(FPCSC_ENABLE_PROJECT_CONTEXTSENS_${NAME}
+  option(FPCSC_ENABLE_PROJECT_${NAME}
          "Enable synthetic context senstivitiy cases study." OFF
   )
 
