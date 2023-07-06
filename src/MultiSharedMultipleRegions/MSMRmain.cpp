@@ -8,48 +8,48 @@
 int main(int argc, char *argv[]) {
   bool __attribute__((feature_variable("Slow"))) Slow = false;
 
-  if (fpcsc::isFeatureEnabled(argc, argv, std::string("--slow"))) {
+  if (fp_util::isFeatureEnabled(argc, argv, std::string("--slow"))) {
     Slow = true;
   }
 
-  if (fpcsc::isFeatureEnabled(argc, argv, std::string("--header"))) {
+  if (fp_util::isFeatureEnabled(argc, argv, std::string("--header"))) {
     HeaderFeature = true;
   }
 
-  if (fpcsc::isFeatureEnabled(argc, argv, std::string("--extern"))) {
+  if (fp_util::isFeatureEnabled(argc, argv, std::string("--extern"))) {
     enableExternFeature();
   }
 
-  if (fpcsc::isFeatureEnabled(argc, argv, std::string("--cpp"))) {
+  if (fp_util::isFeatureEnabled(argc, argv, std::string("--cpp"))) {
     enableCppFeature();
   }
 
   // Multiple regions related to --slow that take different amounts of time.
 
   if (Slow) {
-    fpcsc::sleep_for_secs(5);
+    fp_util::sleep_for_secs(5);
   } else {
-    fpcsc::sleep_for_secs(3);
+    fp_util::sleep_for_secs(3);
   }
 
-  fpcsc::sleep_for_secs(2); // General waiting time
+  fp_util::sleep_for_secs(2); // General waiting time
 
   if (HeaderFeature) {
-    fpcsc::sleep_for_secs(3);
+    fp_util::sleep_for_secs(3);
   } else {
-    fpcsc::sleep_for_secs(1);
+    fp_util::sleep_for_secs(1);
   }
 
-  fpcsc::sleep_for_secs(2); // General waiting time
+  fp_util::sleep_for_secs(2); // General waiting time
 
   if (ExternFeature) {
-    fpcsc::sleep_for_secs(6);
+    fp_util::sleep_for_secs(6);
   }
 
-  fpcsc::sleep_for_secs(2); // General waiting time
+  fp_util::sleep_for_secs(2); // General waiting time
 
   if (isCppFeatureEnabled()) {
-    fpcsc::sleep_for_secs(3);
+    fp_util::sleep_for_secs(3);
   }
 
   return 0;

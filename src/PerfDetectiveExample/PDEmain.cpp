@@ -12,21 +12,21 @@ int preCalculate(int z) {
 
 void bar(int z) {
   for (int i = 0; i < z; i++) {
-    fpcsc::sleep_for_millisecs(200);
+    fp_util::sleep_for_millisecs(200);
   }
 }
 
 void baz(int z) {
   int flag = preCalculate(z);
   for (int i = flag; i < z; i++) {
-    fpcsc::sleep_for_millisecs(300);
+    fp_util::sleep_for_millisecs(300);
   }
 }
 
 void foo(int y, int z, int iters) {
   for (int i = 0; i < iters; i++) {
     for (int j = 0; j < y; j++) {
-      fpcsc::sleep_for_millisecs(100);
+      fp_util::sleep_for_millisecs(100);
     }
   }
   bar(z);
