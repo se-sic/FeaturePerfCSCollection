@@ -1,7 +1,3 @@
 add_test_binary("SingleLocalSimple")
 
-add_executable(
-  SingleLocalSimple
-
-  SLSmain.cpp
-)
+add_executable(SingleLocalSimple SLSmain.cpp)

@@ -1,4 +1,4 @@
-#include "fpcsc/perf_util/sleep.h"
+#include "fp_util/sleep.h"
 
 #include <string>
 
@@ -14,23 +14,23 @@ int main(int argc, char *argv[]) {
   // Multiple regions related to --slow that take different amounts of time.
 
   if (Slow) {
-    fpcsc::sleep_for_secs(5);
+    fp_util::sleep_for_secs(5);
   } else {
-    fpcsc::sleep_for_secs(2);
+    fp_util::sleep_for_secs(2);
   }
 
-  fpcsc::sleep_for_secs(3); // General waiting time
+  fp_util::sleep_for_secs(3); // General waiting time
 
   if (Slow) {
-    fpcsc::sleep_for_secs(3);
+    fp_util::sleep_for_secs(3);
   } else {
-    fpcsc::sleep_for_secs(1);
+    fp_util::sleep_for_secs(1);
   }
 
-  fpcsc::sleep_for_secs(4); // General waiting time
+  fp_util::sleep_for_secs(4); // General waiting time
 
   if (Slow) {
-    fpcsc::sleep_for_secs(6);
+    fp_util::sleep_for_secs(6);
   }
 
   return 0;
