@@ -67,6 +67,8 @@ int main(int argc, char *argv[]) {
               MemoryLimit, UserInput);
 
   uint64_t Result{};
+  // load up time
+  fp_util::sleep_for_secs(2);
 
   if (boundsChecks(MemoryLimit) < 256) { // 0 =< x < 256
     if (Compress) {
@@ -80,6 +82,8 @@ int main(int argc, char *argv[]) {
     Result = compute(UserInput, 250);
   }
 
+  // shutdown time
+  fp_util::sleep_for_secs(3);
   std::printf("Result: %lu\n", Result);
 
   return 0;
