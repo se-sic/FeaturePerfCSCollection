@@ -1,0 +1,3 @@
+[submodule "external/FeaturePerfUtilities"]
+	path = external/FeaturePerfUtilities
+	url = https://github.com/se-sic/FeaturePerfUtilities.git

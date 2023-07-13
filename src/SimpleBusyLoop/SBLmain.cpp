@@ -1,5 +1,5 @@
-#include "fpcsc/perf_util/feature_cmd.h"
-#include "fpcsc/perf_util/sleep.h"
+#include "fp_util/feature_cmd.h"
+#include "fp_util/sleep.h"
 
 #include <iostream>
 #include <string>
@@ -8,8 +8,8 @@ long __attribute__((feature_variable("NumIterations"))) NumIterations;
 long CountTo;
 
 bool parseParams(int argc, char *argv[]) {
-  NumIterations = fpcsc::getFeatureValue(argc, argv, "--iterations");
-  CountTo = fpcsc::getFeatureValue(argc, argv, "--count_to");
+  NumIterations = fp_util::getFeatureValue(argc, argv, "--iterations");
+  CountTo = fp_util::getFeatureValue(argc, argv, "--count_to");
 
   if (!NumIterations || !CountTo) {
     std::cerr << "Required feature missing."
@@ -31,7 +31,7 @@ int main(int argc, char *argv[]) {
     }
   }
 
-  fpcsc::sleep_for_secs(2);
+  fp_util::sleep_for_secs(2);
 
   return 0;
 }

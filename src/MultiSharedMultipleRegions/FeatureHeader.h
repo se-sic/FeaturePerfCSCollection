@@ -3,11 +3,10 @@
 
 extern bool __attribute__((feature_variable("Extern"))) ExternFeature;
 
-static inline bool __attribute__((feature_variable("Header"))) HeaderFeature = false;
+static inline bool __attribute__((feature_variable("Header"))) HeaderFeature =
+    false;
 
-inline void enableExternFeature() {
-  ExternFeature = true;
-}
+inline void enableExternFeature() { ExternFeature = true; }
 
 void enableCppFeature();
 bool isCppFeatureEnabled();

@@ -1,31 +1,32 @@
-#include "fpcsc/perf_util/sleep.h"
+#include "fp_util/sleep.h"
 
 #include <cstdlib>
 
 static int x2 = 0;
 
 int preCalculate(int z) {
-  if (x2 < 10) return 0;
+  if (x2 < 10)
+    return 0;
   return 1;
 }
 
 void bar(int z) {
   for (int i = 0; i < z; i++) {
-    fpcsc::sleep_for_millisecs(200);
+    fp_util::sleep_for_millisecs(200);
   }
 }
 
 void baz(int z) {
   int flag = preCalculate(z);
   for (int i = flag; i < z; i++) {
-    fpcsc::sleep_for_millisecs(300);
+    fp_util::sleep_for_millisecs(300);
   }
 }
 
 void foo(int y, int z, int iters) {
   for (int i = 0; i < iters; i++) {
     for (int j = 0; j < y; j++) {
-      fpcsc::sleep_for_millisecs(100);
+      fp_util::sleep_for_millisecs(100);
     }
   }
   bar(z);
