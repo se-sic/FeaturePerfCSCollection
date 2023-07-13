@@ -1,8 +1,8 @@
-#include "fpcsc/perf_util/sleep.h"
+#include "fp_util/sleep.h"
 
 using namespace std;
-using fpcsc::busy_sleep_for_secs;
-using fpcsc::busy_sleep_for_millisecs;
+using fp_util::busy_sleep_for_secs;
+using fp_util::busy_sleep_for_millisecs;
 
 template <typename AlgoTy>
 struct ConfigTraits {
