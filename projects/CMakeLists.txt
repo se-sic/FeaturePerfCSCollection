@@ -1,4 +1,4 @@
 add_project(SynthSAContextSensitivity)
 add_project(SynthSAFieldSensitivity)
 add_project(SynthSAFlowSensitivity)
-add_project(SynthSAInterProcedural)
+add_project(SynthSAWholeProgram)
