@@ -6,7 +6,7 @@
 #include <cstdio>
 #include <limits>
 
-/// This synthetic case study depcits a small computation tool that
+/// This synthetic case study depicts a small computation tool that
 ///
 /// The key idea is that boundsChecks needs a context sensitive static
 /// analysis, otherwise the non-feature-related usages would be detected and
