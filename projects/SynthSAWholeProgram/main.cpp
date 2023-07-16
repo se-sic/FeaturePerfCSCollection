@@ -24,12 +24,12 @@ int main(int argc, char *argv[]) {
 
   uint64_t Result{};
 
-  if (CountPattern) {
+  if (isCountPattern()) {
     Result = countPattern(Text, Pattern);
     std::printf("Got %lu patterns\n", Result);
   }
 
-  if (PrintPattern) {
+  if (isPrintPattern()) {
     auto PatternIdxs = getPatternIdxs(Text, Pattern);
     std::printf("Patterns: ");
     for (auto Idx : PatternIdxs) {

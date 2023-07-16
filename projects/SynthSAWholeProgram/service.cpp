@@ -8,7 +8,7 @@ uint64_t countPattern(std::string_view Data, std::string_view Pattern) {
 
 std::vector<uint64_t> getPatternIdxs(std::string_view Data,
                                      std::string_view Pattern) {
-  if (Fast) {
+  if (isFast()) {
     return librarySearch(Data, Pattern);
   }
   return naiveSearch(Data, Pattern);

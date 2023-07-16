@@ -3,11 +3,9 @@
 
 #include <cinttypes>
 
-inline bool __attribute__((feature_variable("count"))) CountPattern = false;
-
-inline bool __attribute__((feature_variable("print"))) PrintPattern = false;
-
-inline bool __attribute__((feature_variable("fast"))) Fast = false;
+bool isCountPattern();
+bool isPrintPattern();
+bool isFast();
 
 void parseConfigOptions(int argc, char *argv[]);
 
