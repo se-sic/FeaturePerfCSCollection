@@ -3,7 +3,8 @@
 
 #include <cstdio>
 
-/// This synthetic case study depicts a TODO with three feature flags.
+/// This synthetic case study computes Fibonacci with two feature flags, for
+/// recursive VS iteractive solving and a max number cutoff.
 ///
 /// The key idea is that come code is only feature dependent after a specific
 /// point in the program. Hence, an analysis needs to be flow sensitivity to
