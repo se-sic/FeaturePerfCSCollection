@@ -1,4 +1,4 @@
-#include "fpcsc/perf_util/sleep.h"
+#include "fp_util/sleep.h"
 
 #include <string>
 
@@ -12,9 +12,9 @@ int main(int argc, char *argv[]) {
   }
 
   if (Slow) {
-    fpcsc::sleep_for_secs(5);
+    fp_util::sleep_for_secs(5);
   } else {
-    fpcsc::sleep_for_secs(2);
+    fp_util::sleep_for_secs(2);
   }
 
   return 0;
