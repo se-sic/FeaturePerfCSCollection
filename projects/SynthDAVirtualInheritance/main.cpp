@@ -9,6 +9,16 @@
 #include <unordered_map>
 #include <vector>
 
+/// This synthetic case study targets virtual inheritance.
+///
+/// --sorting  : use a sort-based searcher instead
+/// --hashing  : use a hash-based searcher instead
+/// --sum      : sum so search for
+/// value_list : to search in
+///
+/// The key idea is that configuration code is separated into three different
+/// classes that all implement the same virtual interface.
+
 class PairSearcher {
 public:
   PairSearcher(const std::vector<uint32_t> &Data) : Data(Data) {}
