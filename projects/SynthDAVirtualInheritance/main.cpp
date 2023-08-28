@@ -1,4 +1,5 @@
 #include "fp_util/feature_cmd.h"
+#include "fp_util/sleep.h"
 
 #include <algorithm>
 #include <cstdint>
@@ -42,6 +43,7 @@ public:
 
     for (int i = 0; i < Data.size() - 1; i++) {
       for (int j = i + 1; j < Data.size(); j++) {
+        fp_util::sleep_for_millisecs(100);
         if (Data[i] + Data[j] == TargetSum) {
           return {std::tuple<uint32_t, uint32_t>{Data[i], Data[j]}};
         }
@@ -69,6 +71,7 @@ public:
     int High = LocalData.size() - 1;
 
     while (Low < High) {
+      fp_util::sleep_for_millisecs(100);
       if (LocalData[Low] + LocalData[High] == TargetSum) {
         return {
             std::tuple<uint32_t, uint32_t>{LocalData[Low], LocalData[High]}};
@@ -96,6 +99,7 @@ public:
     std::unordered_map<int, int> Map;
 
     for (int i = 0; i < Data.size(); i++) {
+      fp_util::sleep_for_millisecs(100);
       if (auto Entry = Map.find(TargetSum - Data[i]); Entry != Map.end()) {
         return {std::tuple<uint32_t, uint32_t>{Data[Entry->second], Data[i]}};
       }
