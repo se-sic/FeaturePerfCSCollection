@@ -28,6 +28,7 @@ struct Node {
     if (Left) {
       Left->printInOrder();
     }
+    fp_util::sleep_for_millisecs(50);
     std::cout << " " << Data << " ";
     if (Right) {
       Right->printInOrder();
@@ -54,6 +55,7 @@ struct BinaryTree {
     NodeQueue.push(RootNode.get());
 
     while (!NodeQueue.empty()) {
+      fp_util::sleep_for_millisecs(30);
       Node *CurrentNode = NodeQueue.front();
       NodeQueue.pop();
 
@@ -85,7 +87,7 @@ private:
 };
 
 uint32_t findSum(Node *CurrentNode, uint32_t TmpSum) {
-
+  fp_util::sleep_for_millisecs(60);
   if (!CurrentNode) {
     return 0;
   }
@@ -110,6 +112,7 @@ uint32_t findMax(Node *CurrentNode) {
     RightMax = findMax(CurrentNode->Right.get());
   }
 
+  fp_util::sleep_for_millisecs(80);
   return std::max(CurrentNode->Data, std::max(LeftMax, RightMax));
 }
 
