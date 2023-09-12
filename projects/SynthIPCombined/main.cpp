@@ -3,7 +3,8 @@
 #include <stdio.h>
 #include <vector>
 
-/// This is a synthetic case study using load-time configuration.
+/// This is a synthetic case study using templates and load-time parameters
+/// for configuration.
 ///
 /// Features:
 ///   compress:   compress a file
@@ -562,7 +563,6 @@ struct decompress_t {
   std::string &result() { return ret; }
 };
 
-
 //==============================================================================
 // Configurability implementation
 //==============================================================================
@@ -588,12 +588,18 @@ int getBlocksize(bool smallmode) {
   return DEFAULT_BLOCKSIZE;
 }
 
-int main(int argc, char **argv) {
+enum YALZ77Mode { COMPRESS, DECOMPRESS };
 
+template <bool fastmode, bool smallmode> struct YALZ77Configurator {
+  static const bool __attribute__((feature_variable("fastmode"))) fast =
+      fastmode;
+  static const bool __attribute__((feature_variable("smallmode"))) small =
+      smallmode;
+};
+
+int main(int argc, char **argv) {
   bool __attribute__((feature_variable("compress"))) compress = false;
   bool __attribute__((feature_variable("decompress"))) decompress = false;
-  bool __attribute__((feature_variable("fastmode"))) fastmode = false;
-  bool __attribute__((feature_variable("smallmode"))) smallmode = false;
 
   for (int i = 1; i < argc; ++i) {
     std::string arg(argv[i]);
@@ -602,20 +608,18 @@ int main(int argc, char **argv) {
       compress = true;
     else if (arg == "-d")
       decompress = true;
-    else if (arg == "-1")
-      fastmode = true;
-    else if (arg == "-2")
-      smallmode = true;
   }
 
-  const size_t BUFSIZE = getBufsize(smallmode, decompress);
+  using MyConfig = YALZ77Configurator<false, false>;
+
+  const size_t BUFSIZE = getBufsize(MyConfig::small, decompress);
 
   if (compress) {
 
     std::string buff;
 
-    size_t searchlen = getSearchlen(fastmode);
-    size_t blocksize = getBlocksize(smallmode);
+    size_t searchlen = getSearchlen(MyConfig::fast);
+    size_t blocksize = getBlocksize(MyConfig::small);
 
     compress_t compress(searchlen, blocksize);
 
@@ -672,12 +676,9 @@ int main(int argc, char **argv) {
 
   } else {
     fprintf(stderr,
-            "Usage: %s [-1|-2] {-c|-d}, where -c is compression and -d is "
+            "Usage: %s {-c|-d}, where -c is compression and -d is "
             "decompression.\n"
-            "  Input is stdin and and output is stdout.\n"
-            "  Add '-1' when compressing to enable fast and bad compression.\n"
-            "  Add '-2' when compressing to enable a compression mode for "
-            "small files.\n",
+            "  Input is stdin and and output is stdout.\n",
             argv[0]);
     return 1;
   }

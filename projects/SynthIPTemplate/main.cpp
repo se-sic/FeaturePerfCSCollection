@@ -3,7 +3,9 @@
 #include <stdio.h>
 #include <vector>
 
-/// This is a synthetic case study using load-time configuration.
+/// This is a synthetic case study using templates for configuration.
+/// Not all features can be properly annotated into the source code because
+/// they happen at compile time.
 ///
 /// Features:
 ///   compress:   compress a file
@@ -567,55 +569,17 @@ struct decompress_t {
 // Configurability implementation
 //==============================================================================
 
-int getBufsize(bool smallmode, bool decompress) {
-  if (smallmode || decompress) {
-    return 100 * 1024;
-  }
-  return 10 * 1024 * 1024;
-}
+enum YALZ77Mode { COMPRESS, DECOMPRESS };
 
-int getSearchlen(bool fastmode) {
-  if (fastmode) {
-    return 1;
-  }
-  return DEFAULT_SEARCHLEN;
-}
+template <YALZ77Mode mode, size_t searchlen, size_t blocksize, size_t BUFSIZE>
+struct YALZ77Algorithm {
+  static void run();
+};
 
-int getBlocksize(bool smallmode) {
-  if (smallmode) {
-    return 4096;
-  }
-  return DEFAULT_BLOCKSIZE;
-}
-
-int main(int argc, char **argv) {
-
-  bool __attribute__((feature_variable("compress"))) compress = false;
-  bool __attribute__((feature_variable("decompress"))) decompress = false;
-  bool __attribute__((feature_variable("fastmode"))) fastmode = false;
-  bool __attribute__((feature_variable("smallmode"))) smallmode = false;
-
-  for (int i = 1; i < argc; ++i) {
-    std::string arg(argv[i]);
-
-    if (arg == "-c")
-      compress = true;
-    else if (arg == "-d")
-      decompress = true;
-    else if (arg == "-1")
-      fastmode = true;
-    else if (arg == "-2")
-      smallmode = true;
-  }
-
-  const size_t BUFSIZE = getBufsize(smallmode, decompress);
-
-  if (compress) {
-
+template <size_t searchlen, size_t blocksize, size_t BUFSIZE>
+struct YALZ77Algorithm<COMPRESS, searchlen, blocksize, BUFSIZE> {
+  static void __attribute__((feature_variable("compress"))) run() {
     std::string buff;
-
-    size_t searchlen = getSearchlen(fastmode);
-    size_t blocksize = getBlocksize(smallmode);
 
     compress_t compress(searchlen, blocksize);
 
@@ -632,9 +596,12 @@ int main(int argc, char **argv) {
       if (i != BUFSIZE)
         break;
     }
+  }
+};
 
-  } else if (decompress) {
-
+template <size_t searchlen, size_t blocksize, size_t BUFSIZE>
+struct YALZ77Algorithm<DECOMPRESS, searchlen, blocksize, BUFSIZE> {
+  static void __attribute__((feature_variable("decompress"))) run() {
     std::string buff;
     buff.resize(BUFSIZE);
     size_t buff_size = 0;
@@ -669,18 +636,24 @@ int main(int argc, char **argv) {
       if (buff_size != BUFSIZE)
         break;
     }
-
-  } else {
-    fprintf(stderr,
-            "Usage: %s [-1|-2] {-c|-d}, where -c is compression and -d is "
-            "decompression.\n"
-            "  Input is stdin and and output is stdout.\n"
-            "  Add '-1' when compressing to enable fast and bad compression.\n"
-            "  Add '-2' when compressing to enable a compression mode for "
-            "small files.\n",
-            argv[0]);
-    return 1;
   }
+};
+
+template <YALZ77Mode yalz77mode, bool fastmode, bool smallmode>
+struct YALZ77Configurator {
+private:
+  static const size_t searchlen = fastmode ? 1 : DEFAULT_SEARCHLEN;
+  static const size_t blocksize = smallmode ? 4096 : DEFAULT_BLOCKSIZE;
+  static const size_t BUFSIZE =
+      smallmode || (yalz77mode == DECOMPRESS) ? 100 * 1024 : 10 * 1024 * 1024;
+
+public:
+  using YALZ77 = YALZ77Algorithm<yalz77mode, searchlen, blocksize, BUFSIZE>;
+};
+
+int main() {
+  using MyConfig = YALZ77Configurator<DECOMPRESS, false, false>;
+  MyConfig::YALZ77::run();
 
   return 0;
 }
