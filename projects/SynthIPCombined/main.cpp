@@ -445,9 +445,10 @@ struct decompress_t {
 
       state = state_t();
 
-      if (max_size && size > max_size)
-        throw std::length_error(
-            "Uncompressed data in message deemed too large");
+      if (max_size && size > max_size) {
+        std::cerr << "Uncompressed data in message deemed too large";
+        exit(1);
+      }
 
       ret.resize(size);
 
@@ -483,8 +484,10 @@ struct decompress_t {
 
         size_t len = state.msg;
 
-        if (out + len > oute)
-          throw std::runtime_error("Malformed data while uncompressing");
+        if (out + len > oute) {
+          std::cerr << "Malformed data while uncompressing";
+          exit(1);
+        }
 
         if (i == e)
           return false;
@@ -526,8 +529,11 @@ struct decompress_t {
 
         unsigned char *outi = out - off;
 
-        if (outi >= oute || outi < outb || out + run > oute || out + run < out)
-          throw std::runtime_error("Malformed data while uncompressing");
+        if (outi >= oute || outi < outb || out + run > oute ||
+            out + run < out) {
+          std::cerr << "Malformed data while uncompressing";
+          exit(1);
+        }
 
         if (outi + run < out) {
           memcpy(out, outi, run);
