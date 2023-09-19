@@ -12,29 +12,43 @@ protected:
 
 template <typename T> struct DataManipulator : CRPT<T> {
 
-  std::vector<double> createData(std::size_t n) {
+  __attribute__((feature_variable("DataManipulator"))) std::vector<double>
+  createData(std::size_t n) {
     return this->underlying().createData(n);
   }
 
-  void manipulateData(std::vector<double> &Data) {
+  __attribute__((feature_variable("DataManipulator"))) void
+  manipulateData(std::vector<double> &Data) {
     this->underlying().manipulateData(Data);
   }
 };
 
-template <typename T> struct Caching : CRPT<T> {
-  void init() { this->underlying().init(); }
+template <typename T> struct Cached : CRPT<T> {
+  __attribute__((feature_variable("Cache"))) void init() {
+    this->underlying().init();
+  }
 
-  void createCache() { this->underlying().createCache(); }
+  __attribute__((feature_variable("Cache"))) void createCache() {
+    this->underlying().createCache();
+  }
 
-  void getCached() { this->underlying().getCached(); }
+  __attribute__((feature_variable("Cache"))) void getCached() {
+    this->underlying().getCached();
+  }
 };
 
 template <typename T> struct Transformer : CRPT<T> {
-  void init() { this->underlying().init(); }
+  __attribute__((feature_variable("Transformer"))) void init() {
+    this->underlying().init();
+  }
 
-  void prepareTransformation() { this->underlying().prepareTransformation(); }
+  __attribute__((feature_variable("Transformer"))) void
+  prepareTransformation() {
+    this->underlying().prepareTransformation();
+  }
 
-  void transform(std::vector<double> &Data) {
+  __attribute__((feature_variable("Transformer"))) void
+  transform(std::vector<double> &Data) {
     this->underlying().transform(Data);
   }
 };
@@ -65,10 +79,10 @@ public:
 
 template <typename T1>
 class CachingTransformer : public Transformer<CachingTransformer<T1>> {
-  Caching<T1> &Cache;
+  Cached<T1> &Cache;
 
 public:
-  explicit CachingTransformer(Caching<T1> &Cache) : Cache(Cache) {}
+  explicit CachingTransformer(Cached<T1> &Cache) : Cache(Cache) {}
 
   void init() { busy_sleep_for_millisecs(1000); }
 
@@ -89,7 +103,7 @@ public:
   }
 };
 
-class Weights : public Caching<Weights> {
+class Weights : public Cached<Weights> {
 public:
   void init() { busy_sleep_for_millisecs(1000); }
 
@@ -99,7 +113,7 @@ public:
 };
 
 template <typename T1, typename T2, typename T3>
-void runAlgorithm(Caching<T1> &Cache, Transformer<T2> &Transformer,
+void runAlgorithm(Cached<T1> &Cache, Transformer<T2> &Transformer,
                   DataManipulator<T3> &Storage) {
   // Perform "algorithm"
   busy_sleep_for_secs(1);
