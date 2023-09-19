@@ -5,12 +5,12 @@ using namespace std;
 using fp_util::busy_sleep_for_millisecs;
 using fp_util::busy_sleep_for_secs;
 
-template <typename T> class CRPT {
+template <typename T> class CRTP {
 protected:
   T &underlying() { return static_cast<T &>(*this); }
 };
 
-template <typename T> struct DataManipulator : CRPT<T> {
+template <typename T> struct DataManipulator : CRTP<T> {
 
   __attribute__((feature_variable("DataManipulator"))) std::vector<double>
   createData(std::size_t n) {
@@ -23,7 +23,7 @@ template <typename T> struct DataManipulator : CRPT<T> {
   }
 };
 
-template <typename T> struct Cached : CRPT<T> {
+template <typename T> struct Cached : CRTP<T> {
   __attribute__((feature_variable("Cache"))) void init() {
     this->underlying().init();
   }
@@ -37,7 +37,7 @@ template <typename T> struct Cached : CRPT<T> {
   }
 };
 
-template <typename T> struct Transformer : CRPT<T> {
+template <typename T> struct Transformer : CRTP<T> {
   __attribute__((feature_variable("Transformer"))) void init() {
     this->underlying().init();
   }
