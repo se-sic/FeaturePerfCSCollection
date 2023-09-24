@@ -32,6 +32,7 @@ std::vector<uint32_t> findMaxLenSubarray(std::vector<uint32_t> DataArray, int S,
         std::cout << "CurrentTarget " << Target << '\n';
       }
 
+      fp_util::busy_sleep_for_millisecs(10);
       if (Target == S) {
         if (MaxLength < j - i + 1) {
           MaxLength = j - i + 1;
