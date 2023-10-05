@@ -13,19 +13,19 @@ private:
   using StrgTraits = StorageTraits<StorageTy>;
 
   void initComponents() {
-    if constexpr (AlgoTraits::HasComponentA) {
+    if (AlgoTraits::HasComponentA) {
       _alg.initA();
     }
 
-    if constexpr (AlgoTraits::HasComponentB) {
+    if (AlgoTraits::HasComponentB) {
       _alg.initB();
     }
 
-    if constexpr (StrgTraits::HasComponentC) {
+    if (StrgTraits::HasComponentC) {
       _strg.initC();
     }
 
-    if constexpr (StrgTraits::HasComponentD) {
+    if (StrgTraits::HasComponentD) {
       _strg.initD();
     }
   }
@@ -35,23 +35,23 @@ private:
     _strg.get();
     _alg.run(_strg);
 
-    if constexpr (AlgoTraits::HasComponentA) {
+    if (AlgoTraits::HasComponentA) {
       _alg.processA(_strg);
     }
 
-    if constexpr (AlgoTraits::HasComponentB) {
+    if (AlgoTraits::HasComponentB) {
       _alg.processB(_strg);
     }
 
-    if constexpr (AlgoTraits::HasComponentA && AlgoTraits::HasComponentB) {
+    if (AlgoTraits::HasComponentA && AlgoTraits::HasComponentB) {
       _alg.processAB(_strg);
     }
 
-    if constexpr (StrgTraits::HasComponentC) {
+    if (StrgTraits::HasComponentC) {
       _strg.processC();
     }
 
-    if constexpr (StrgTraits::HasComponentD) {
+    if (StrgTraits::HasComponentD) {
       _strg.processD();
     }
   }
@@ -61,7 +61,7 @@ private:
 };
 
 int main() {
-  GenericImpl<NullAlgorithm, StorageWithCD> Impl{};
+  GenericImpl<NullAlgorithm, NullStorage> Impl{};
   Impl.run();
 
   return 0;

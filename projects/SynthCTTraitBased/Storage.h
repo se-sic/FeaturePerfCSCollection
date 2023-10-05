@@ -9,9 +9,13 @@ using fp_util::busy_sleep_for_secs;
 
 struct NullStorage {
   void get(){};
+  void initC(){};
+  void initD(){};
+  void processC(){};
+  void processD(){};
 };
 
-struct StorageWithC {
+struct StorageWithC : public NullStorage {
   void get(){};
 
   void initC() { busy_sleep_for_millisecs(1000); }
@@ -27,13 +31,13 @@ struct OtherStorageWithC {
   void processC() {}
 };
 
-struct StorageWithD {
+struct StorageWithD : public NullStorage {
   void get(){};
 
   void processD() { busy_sleep_for_millisecs(1000); }
 };
 
-struct StorageWithCD {
+struct StorageWithCD : public NullStorage {
   void get() {}
 
   void initC() { busy_sleep_for_millisecs(1000); }

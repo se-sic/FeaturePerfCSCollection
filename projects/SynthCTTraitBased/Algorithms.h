@@ -7,13 +7,18 @@ using namespace std;
 using fp_util::busy_sleep_for_millisecs;
 using fp_util::busy_sleep_for_secs;
 
+// Empty default implementations
+// We currently cannot analyse if constexpr, so we need those
 struct NullAlgorithm {
+  void initA(){};
+  void initB(){};
+  template <typename StorageTy> void processA(StorageTy &S){};
+  template <typename StorageTy> void processB(StorageTy &S){};
+  template <typename StorageTy> void processAB(StorageTy &S){};
   template <typename StorageTy> void run(StorageTy &) {}
 };
 
-struct AlgorithmWithA {
-  template <typename StorageTy> void run(StorageTy &) {}
-
+struct AlgorithmWithA : public NullAlgorithm {
   void initA() { busy_sleep_for_millisecs(1000); }
 
   template <typename StorageTy> void processA(StorageTy &S) {
@@ -25,7 +30,7 @@ struct AlgorithmWithA {
   }
 };
 
-struct OtherAlgorithmWithA {
+struct OtherAlgorithmWithA : public NullAlgorithm {
   void initA() { busy_sleep_for_millisecs(1000); }
 
   template <typename StorageTy> void processA(StorageTy &S) {
@@ -41,15 +46,13 @@ struct OtherAlgorithmWithA {
   }
 
   template <typename StorageTy> void run(StorageTy &S) {
-    if constexpr (StorageTraits<StorageTy>::HasComponentD) {
+    if (StorageTraits<StorageTy>::HasComponentD) {
       S.processD();
     }
   }
 };
 
-struct AlgorithmWithB {
-  template <typename StorageTy> void run(StorageTy &) {}
-
+struct AlgorithmWithB : public NullAlgorithm {
   void initB() { busy_sleep_for_millisecs(1000); }
 
   template <typename StorageTy> void processB(StorageTy &S) {
@@ -61,9 +64,7 @@ struct AlgorithmWithB {
   }
 };
 
-struct AlgorithmWithAB {
-  template <typename StorageTy> void run(StorageTy &) {}
-
+struct AlgorithmWithAB : public NullAlgorithm {
   void initA() { busy_sleep_for_millisecs(1000); }
 
   void initB() { busy_sleep_for_millisecs(1000); }
@@ -78,8 +79,8 @@ struct AlgorithmWithAB {
 
   template <typename StorageTy> void processB(StorageTy &S) {
     busy_sleep_for_millisecs(1000);
-    if constexpr (StorageTraits<StorageTy>::HasComponentC &&
-                  StorageTraits<StorageTy>::HasComponentD) {
+    if (StorageTraits<StorageTy>::HasComponentC &&
+        StorageTraits<StorageTy>::HasComponentD) {
       S.get();
     }
     busy_sleep_for_millisecs(1000);
@@ -89,6 +90,7 @@ struct AlgorithmWithAB {
     busy_sleep_for_millisecs(1000);
 
     if (StorageTraits<StorageTy>::HasComponentD) {
+      S.processD();
     }
 
     S.get();
