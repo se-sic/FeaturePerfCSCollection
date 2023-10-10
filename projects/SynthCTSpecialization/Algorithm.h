@@ -45,11 +45,10 @@ struct DirectSolvingAlgorithm {
 };
 
 struct SmoothingAlgorithm {
-  __attribute__((feature_variable("Smoother"))) void init() {
-    busy_sleep_for_millisecs(1000);
-  };
+  void init() { busy_sleep_for_millisecs(1000); };
 
-  void precomputeSmoothingParameters(size_t l) {
+  __attribute__((feature_variable("Smoother"))) void
+  precomputeSmoothingParameters(size_t l) {
     busy_sleep_for_millisecs(1000);
   }
 
