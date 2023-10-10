@@ -11,7 +11,7 @@ using namespace std;
 using fp_util::busy_sleep_for_millisecs;
 using fp_util::busy_sleep_for_secs;
 
-struct Algorithm {
+struct DefaultAlgorithm {
   void init() { busy_sleep_for_millisecs(1000); };
 
   template <typename StorageTy> void step1(StorageTy &S) {

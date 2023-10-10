@@ -12,7 +12,7 @@ template <typename AlgoTy, typename StorageTy> void run() {
 }
 
 int main(/* int argc, char *argv[] */) {
-  run<Algorithm, Storage>();
+  run<DefaultAlgorithm, DefaultStorage>();
 
   return 0;
 }

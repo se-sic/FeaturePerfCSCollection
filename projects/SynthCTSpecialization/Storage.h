@@ -9,7 +9,7 @@
 
 using fp_util::busy_sleep_for_millisecs;
 
-struct Storage {
+struct DefaultStorage {
   void init() { busy_sleep_for_millisecs(1000); }
 
   void getElement(std::size_t n) { busy_sleep_for_millisecs(1000); }
