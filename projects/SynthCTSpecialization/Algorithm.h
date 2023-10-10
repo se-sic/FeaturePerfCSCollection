@@ -29,6 +29,7 @@ struct DefaultAlgorithm {
 private:
   template <typename StorageTy>
   __attribute__((feature_variable("Solver"))) void solve(StorageTy &S) {
+    busy_sleep_for_millisecs(1000);
     access(S, 1);
   }
 };
