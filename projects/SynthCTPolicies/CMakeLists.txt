@@ -1,3 +1,3 @@
-add_test_binary("CT-Policies")
+add_test_binary("CTPolicies")
 
-add_executable(CT-Policies main.cpp Storage.h Transformer.h Logging.h)
+add_executable(CTPolicies main.cpp Storage.h Transformer.h Logging.h)

@@ -1,3 +1,3 @@
-add_test_binary("CT-CRTP")
+add_test_binary("CTCRTP")
 
-add_executable(CT-CRTP main.cpp)
+add_executable(CTCRTP main.cpp)

@@ -1,3 +1,3 @@
-add_test_binary("CT-TraitBased")
+add_test_binary("CTTraitBased")
 
-add_executable(CT-TraitBased main.cpp TraitDefinitions.h Algorithms.h Storage.h)
+add_executable(CTTraitBased main.cpp TraitDefinitions.h Algorithms.h Storage.h)

@@ -1,3 +1,3 @@
-add_test_binary("CT-TemplateSpecialization")
+add_test_binary("CTTemplateSpecialization")
 
-add_executable(CT-TemplateSpecialization main.cpp)
+add_executable(CTTemplateSpecialization main.cpp Storage.h)
