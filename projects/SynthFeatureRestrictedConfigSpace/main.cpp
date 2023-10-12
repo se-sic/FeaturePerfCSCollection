@@ -1,7 +1,7 @@
 #include "fp_util/feature_cmd.h"
 #include "fp_util/sleep.h"
 
-/// This synthetic case study has a large (unconstrained) configuration space
+/// This synthetic case study has a highly constrained configuration space
 /// where only a small portion affects the final sleep.
 ///
 /// --f1  : enable f1
