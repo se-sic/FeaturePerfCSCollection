@@ -29,10 +29,103 @@ template <typename T> struct Transformer : CRTP<T> {
   transformOperation3(Storage<STy> &S) {
     this->underlying().transformOperation3(S);
   }
+
+  __attribute__((feature_variable("Transformer"))) void teardown() {
+    this->underlying().teardown();
+  }
 };
 
-struct SmoothingTransformer : Transformer<SmoothingTransformer> {};
+struct DefaultTransformer : Transformer<DefaultTransformer> {
+  void init() { busy_sleep_for_millisecs(1000); }
 
-struct PreconditioningTransformer : Transformer<PreconditioningTransformer> {};
+  template <typename STy> void transformOperation1(Storage<STy> &S) {
+    busy_sleep_for_millisecs(1000);
+  }
+
+  template <typename STy> void transformOperation2(Storage<STy> &S) {
+    busy_sleep_for_millisecs(1000);
+    S.getElement(0);
+  }
+
+  template <typename STy> void transformOperation3(Storage<STy> &S) {
+    busy_sleep_for_millisecs(1000);
+    S.setElement(1, 42.0);
+  }
+
+  void teardown() { busy_sleep_for_millisecs(1000); }
+};
+
+struct SmoothingTransformer : Transformer<SmoothingTransformer> {
+  void init() {
+    busy_sleep_for_millisecs(1000);
+    initSmoother();
+  }
+
+  template <typename STy> void transformOperation1(Storage<STy> &S) {
+    busy_sleep_for_millisecs(1000);
+  }
+
+  template <typename STy> void transformOperation2(Storage<STy> &S) {
+    busy_sleep_for_millisecs(1000);
+    S.getElement(0);
+  }
+
+  template <typename STy> void transformOperation3(Storage<STy> &S) {
+    busy_sleep_for_millisecs(1000);
+    smoothData(S);
+  }
+
+  void teardown() { busy_sleep_for_millisecs(1000); }
+
+private:
+  template <class STy>
+  __attribute__((feature_variable("Smoother"))) void
+  smoothData(Storage<STy> &S) {
+    busy_sleep_for_millisecs(1000);
+    S.setElement(1, 42.0);
+    // Smooth operator... smooooth operator
+    busy_sleep_for_millisecs(1000);
+  }
+
+  __attribute__((feature_variable("Smoother"))) void initSmoother() {
+    busy_sleep_for_millisecs(1000);
+  }
+};
+
+struct PreconditioningTransformer : Transformer<PreconditioningTransformer> {
+  void init() { busy_sleep_for_millisecs(1000); }
+
+  template <typename STy> void transformOperation1(Storage<STy> &S) {
+    busy_sleep_for_millisecs(1000);
+    preconditionData(S);
+  }
+
+  template <typename STy> void transformOperation2(Storage<STy> &S) {
+    busy_sleep_for_millisecs(1000);
+    S.setElement(0, 13.37);
+  }
+
+  template <typename STy> void transformOperation3(Storage<STy> &S) {
+    busy_sleep_for_millisecs(1000);
+  }
+
+  void teardown() {
+    busy_sleep_for_millisecs(1000);
+    resetPreconditioner();
+  }
+
+private:
+  template <typename STy>
+  __attribute__((feature_variable("Preconditioner"))) void
+  preconditionData(Storage<STy> &S) {
+    S.getElement(0);
+    busy_sleep_for_millisecs(1000);
+  }
+
+  __attribute__((feature_variable("Preconditioner"))) void
+  resetPreconditioner() {
+    busy_sleep_for_millisecs(1000);
+  }
+};
 
 #endif // FEATUREPERFORMANCECASESTUDIE_TRANSFORMER_H
