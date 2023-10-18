@@ -23,7 +23,7 @@ struct StorageWithC : public NullStorage {
   void processC() { busy_sleep_for_millisecs(1000); }
 };
 
-struct OtherStorageWithC {
+struct OtherStorageWithC : public NullStorage {
   void get() { busy_sleep_for_millisecs(1000); };
 
   void initC() { busy_sleep_for_millisecs(2000); }

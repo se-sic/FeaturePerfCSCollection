@@ -35,6 +35,9 @@ private:
 };
 
 struct DirectSolvingAlgorithm {
+
+  void init() { busy_sleep_for_millisecs(1000); };
+
   template <typename StorageTy>
   __attribute__((feature_variable("Solver"))) void
   solveForSolution(StorageTy &S) {
