@@ -54,31 +54,42 @@ struct StorageWithCD : public NullStorage {
 };
 
 template <> struct StorageTraits<StorageWithC> {
-  __attribute__((feature_variable("C"))) static constexpr bool HasComponentC =
-      true;
-  __attribute__((feature_variable("D"))) static constexpr bool HasComponentD =
-      false;
+  __attribute__((feature_variable("C"))) static bool HasComponentC;
+  __attribute__((feature_variable("D"))) static bool HasComponentD;
 };
 
+
 template <> struct StorageTraits<OtherStorageWithC> {
-  __attribute__((feature_variable("C"))) static constexpr bool HasComponentC =
-      true;
-  __attribute__((feature_variable("D"))) static constexpr bool HasComponentD =
-      false;
+  __attribute__((feature_variable("C"))) static bool HasComponentC;
+  __attribute__((feature_variable("D"))) static bool HasComponentD;
 };
 
 template <> struct StorageTraits<StorageWithD> {
-  __attribute__((feature_variable("C"))) static constexpr bool HasComponentC =
-      false;
-  __attribute__((feature_variable("D"))) static constexpr bool HasComponentD =
-      true;
+  __attribute__((feature_variable("C"))) static bool HasComponentC;
+  __attribute__((feature_variable("D"))) static bool HasComponentD;
 };
 
 template <> struct StorageTraits<StorageWithCD> {
-  __attribute__((feature_variable("C"))) static constexpr bool HasComponentC =
-      true;
-  __attribute__((feature_variable("D"))) static constexpr bool HasComponentD =
-      true;
+  __attribute__((feature_variable("C"))) static bool HasComponentC;
+  __attribute__((feature_variable("D"))) static bool HasComponentD;
 };
+
+template <> struct StorageTraits<NullStorage> {
+  __attribute__((feature_variable("C"))) static bool HasComponentC;
+  __attribute__((feature_variable("D"))) static bool HasComponentD;
+};
+
+
+bool StorageTraits<NullStorage>::HasComponentC = false;
+bool StorageTraits<NullStorage>::HasComponentD = false;
+bool StorageTraits<StorageWithC>::HasComponentC = true;
+bool StorageTraits<StorageWithC>::HasComponentD = false;
+bool StorageTraits<OtherStorageWithC>::HasComponentC = true;
+bool StorageTraits<OtherStorageWithC>::HasComponentD = false;
+bool StorageTraits<StorageWithD>::HasComponentC = false;
+bool StorageTraits<StorageWithD>::HasComponentD = true;
+bool StorageTraits<StorageWithCD>::HasComponentC = true;
+bool StorageTraits<StorageWithCD>::HasComponentD = true;
+
 
 #endif // FEATUREPERFORMANCECASESTUDIE_STORAGE_H

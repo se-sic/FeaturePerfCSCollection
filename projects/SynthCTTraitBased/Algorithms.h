@@ -101,30 +101,39 @@ struct AlgorithmWithAB : public NullAlgorithm {
 
 // Trait specializations
 template <> struct AlgorithmTraits<AlgorithmWithA> {
-  __attribute__((feature_variable("A"))) static constexpr bool HasComponentA =
-      true;
-  __attribute__((feature_variable("B"))) static constexpr bool HasComponentB =
-      false;
+  __attribute__((feature_variable("A"))) static bool HasComponentA;
+  __attribute__((feature_variable("B"))) static bool HasComponentB;
 };
 
 template <> struct AlgorithmTraits<OtherAlgorithmWithA> {
-  __attribute__((feature_variable("A"))) static constexpr bool HasComponentA =
-      true;
-  __attribute__((feature_variable("B"))) static constexpr bool HasComponentB =
-      false;
+  __attribute__((feature_variable("A"))) static bool HasComponentA;
+  __attribute__((feature_variable("B"))) static bool HasComponentB;
 };
 
 template <> struct AlgorithmTraits<AlgorithmWithB> {
-  __attribute__((feature_variable("A"))) static constexpr bool HasComponentA =
-      false;
-  __attribute__((feature_variable("B"))) static constexpr bool HasComponentB =
-      true;
+  __attribute__((feature_variable("A"))) static bool HasComponentA;
+  __attribute__((feature_variable("B"))) static bool HasComponentB;
 };
 
 template <> struct AlgorithmTraits<AlgorithmWithAB> {
-  __attribute__((feature_variable("A"))) static constexpr bool HasComponentA =
-      true;
-  __attribute__((feature_variable("B"))) static constexpr bool HasComponentB =
-      true;
+  __attribute__((feature_variable("A"))) static bool HasComponentA;
+  __attribute__((feature_variable("B"))) static bool HasComponentB;
 };
+
+template <> struct AlgorithmTraits<NullAlgorithm> {
+  __attribute__((feature_variable("A"))) static bool HasComponentA;
+  __attribute__((feature_variable("B"))) static bool HasComponentB;
+};
+
+bool AlgorithmTraits<NullAlgorithm>::HasComponentA = false;
+bool AlgorithmTraits<NullAlgorithm>::HasComponentB = false;
+bool AlgorithmTraits<AlgorithmWithA>::HasComponentA = true;
+bool AlgorithmTraits<AlgorithmWithA>::HasComponentB = false;
+bool AlgorithmTraits<OtherAlgorithmWithA>::HasComponentA = true;
+bool AlgorithmTraits<OtherAlgorithmWithA>::HasComponentB = false;
+bool AlgorithmTraits<AlgorithmWithB>::HasComponentA = false;
+bool AlgorithmTraits<AlgorithmWithB>::HasComponentB = true;
+bool AlgorithmTraits<AlgorithmWithAB>::HasComponentA = true;
+bool AlgorithmTraits<AlgorithmWithAB>::HasComponentB = true;
+
 #endif // FEATUREPERFORMANCECASESTUDIE_ALGORITHMS_H
