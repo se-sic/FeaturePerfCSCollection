@@ -76,8 +76,6 @@ int main(int argc, char *argv[]) {
     fp_util::sleep_for_millisecs(20);
   }
 
-  ___REGION_START __RT_High "HotCode"
   fp_util::sleep_for_millisecs(sleepTime);
-  ___REGION_END __RT_High "HotCode"
   return 0;
 }
