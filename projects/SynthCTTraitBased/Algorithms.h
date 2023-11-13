@@ -19,9 +19,12 @@ struct NullAlgorithm {
 };
 
 struct AlgorithmWithA : public NullAlgorithm {
-  void initA() { busy_sleep_for_millisecs(1000); }
+  __attribute__((feature_variable("A"))) void initA() {
+    busy_sleep_for_millisecs(1000);
+  }
 
-  template <typename StorageTy> void processA(StorageTy &S) {
+  template <typename StorageTy>
+  __attribute__((feature_variable("A"))) void processA(StorageTy &S) {
     busy_sleep_for_millisecs(1000);
 
     S.get();
@@ -31,9 +34,12 @@ struct AlgorithmWithA : public NullAlgorithm {
 };
 
 struct OtherAlgorithmWithA : public NullAlgorithm {
-  void initA() { busy_sleep_for_millisecs(1000); }
+  __attribute__((feature_variable("A"))) void initA() {
+    busy_sleep_for_millisecs(1000);
+  }
 
-  template <typename StorageTy> void processA(StorageTy &S) {
+  template <typename StorageTy>
+  __attribute__((feature_variable("A"))) void processA(StorageTy &S) {
     busy_sleep_for_millisecs(1000);
 
     S.get();
@@ -53,9 +59,12 @@ struct OtherAlgorithmWithA : public NullAlgorithm {
 };
 
 struct AlgorithmWithB : public NullAlgorithm {
-  void initB() { busy_sleep_for_millisecs(1000); }
+  __attribute__((feature_variable("B"))) void initB() {
+    busy_sleep_for_millisecs(1000);
+  }
 
-  template <typename StorageTy> void processB(StorageTy &S) {
+  template <typename StorageTy>
+  __attribute__((feature_variable("B"))) void processB(StorageTy &S) {
     busy_sleep_for_millisecs(1000);
 
     S.get();
@@ -65,11 +74,16 @@ struct AlgorithmWithB : public NullAlgorithm {
 };
 
 struct AlgorithmWithAB : public NullAlgorithm {
-  void initA() { busy_sleep_for_millisecs(1000); }
+  __attribute__((feature_variable("A"))) void initA() {
+    busy_sleep_for_millisecs(1000);
+  }
 
-  void initB() { busy_sleep_for_millisecs(1000); }
+  __attribute__((feature_variable("B"))) void initB() {
+    busy_sleep_for_millisecs(1000);
+  }
 
-  template <typename StorageTy> void processA(StorageTy &S) {
+  template <typename StorageTy>
+  __attribute__((feature_variable("A"))) void processA(StorageTy &S) {
     busy_sleep_for_millisecs(1000);
 
     S.get();
@@ -77,7 +91,8 @@ struct AlgorithmWithAB : public NullAlgorithm {
     busy_sleep_for_millisecs(1000);
   }
 
-  template <typename StorageTy> void processB(StorageTy &S) {
+  template <typename StorageTy>
+  __attribute__((feature_variable("B"))) void processB(StorageTy &S) {
     busy_sleep_for_millisecs(1000);
     if (StorageTraits<StorageTy>::HasComponentC &&
         StorageTraits<StorageTy>::HasComponentD) {
@@ -86,7 +101,9 @@ struct AlgorithmWithAB : public NullAlgorithm {
     busy_sleep_for_millisecs(1000);
   }
 
-  template <typename StorageTy> void processAB(StorageTy &S) {
+  template <typename StorageTy>
+  __attribute__((feature_variable("A"), feature_variable("B"))) void
+  processAB(StorageTy &S) {
     busy_sleep_for_millisecs(1000);
 
     if (StorageTraits<StorageTy>::HasComponentD) {
@@ -101,30 +118,25 @@ struct AlgorithmWithAB : public NullAlgorithm {
 
 // Trait specializations
 template <> struct AlgorithmTraits<AlgorithmWithA> {
-  __attribute__((feature_variable("A"))) static constexpr bool HasComponentA =
-      true;
-  __attribute__((feature_variable("B"))) static constexpr bool HasComponentB =
+  __attribute__((feature_variable("A"))) static const bool HasComponentA = true;
+  __attribute__((feature_variable("B"))) static const bool HasComponentB =
       false;
 };
 
 template <> struct AlgorithmTraits<OtherAlgorithmWithA> {
-  __attribute__((feature_variable("A"))) static constexpr bool HasComponentA =
-      true;
-  __attribute__((feature_variable("B"))) static constexpr bool HasComponentB =
+  __attribute__((feature_variable("A"))) static const bool HasComponentA = true;
+  __attribute__((feature_variable("B"))) static const bool HasComponentB =
       false;
 };
 
 template <> struct AlgorithmTraits<AlgorithmWithB> {
-  __attribute__((feature_variable("A"))) static constexpr bool HasComponentA =
+  __attribute__((feature_variable("A"))) static const bool HasComponentA =
       false;
-  __attribute__((feature_variable("B"))) static constexpr bool HasComponentB =
-      true;
+  __attribute__((feature_variable("B"))) static const bool HasComponentB = true;
 };
 
 template <> struct AlgorithmTraits<AlgorithmWithAB> {
-  __attribute__((feature_variable("A"))) static constexpr bool HasComponentA =
-      true;
-  __attribute__((feature_variable("B"))) static constexpr bool HasComponentB =
-      true;
+  __attribute__((feature_variable("A"))) static const bool HasComponentA = true;
+  __attribute__((feature_variable("B"))) static const bool HasComponentB = true;
 };
 #endif // FEATUREPERFORMANCECASESTUDIE_ALGORITHMS_H
