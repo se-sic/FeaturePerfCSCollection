@@ -15,9 +15,15 @@ option(FPCSC_ENABLE_ALL
 )
 option(FPCSC_ENABLE_SRC "Enable source builds" OFF)
 
+option(FPCSC_USE_LIBCXX "Use libc++" ON)
+
 include_directories(external/FeaturePerfUtilities/include/)
 
 if(FPCSC_ENABLE_SRC OR FPCSC_ENABLE_ALL)
   add_subdirectory(src)
+endif()
+
+if(FPCSC_USE_LIBCXX)
+  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -stdlib=libc++")
 endif()
 add_subdirectory(projects)
