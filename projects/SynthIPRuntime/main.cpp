@@ -1,7 +1,7 @@
 #include <cstdint>
 #include <cstring>
 #include <iostream>
-#include <stdio.h>
+#include <cstdio>
 #include <vector>
 
 /// This is a synthetic case study using load-time configuration.
@@ -27,9 +27,9 @@ enum {
 
 inline void push_vlq_uint(size_t n, std::string &out) {
 
-  while (1) {
-    unsigned char c = n & 0x7F;
-    size_t q = n >> 7;
+  while (true) {
+    const unsigned char c = n & 0x7F;
+    const size_t q = n >> 7;
 
     if (q == 0) {
       out += c;
@@ -139,19 +139,16 @@ struct offsets_dict_t {
   typedef std::vector<size_t> offsets_t;
   offsets_t offsets;
 
-  const size_t searchlen;
-  const size_t blocksize;
+  offsets_dict_t(const size_t sl, const size_t bs) {
 
-  offsets_dict_t(size_t sl, size_t bs) : searchlen(sl), blocksize(bs) {
-
-    offsets.resize((searchlen + 1) * blocksize);
+    offsets.resize((sl + 1) * bs);
   }
 
-  void clear() { offsets.assign((searchlen + 1) * blocksize, 0); }
+  void clear(size_t searchlen, size_t blocksize) { offsets.assign((searchlen + 1) * blocksize, 0); }
 
   // Functions for a simple circular buffer data structure.
 
-  static size_t *prev(size_t *b, size_t *e, size_t *i) {
+  static size_t *prev(const size_t *b, size_t *e, size_t *i) {
 
     if (i == b)
       i = e;
@@ -160,7 +157,7 @@ struct offsets_dict_t {
     return i;
   }
 
-  static size_t push_back(size_t *b, size_t *e, size_t *head, size_t val) {
+  static size_t push_back(size_t *b, const size_t *e, size_t *head, const size_t val) {
 
     *head = val;
     ++head;
@@ -171,7 +168,7 @@ struct offsets_dict_t {
     return head - b;
   }
 
-  void operator()(uint16_t packed, const unsigned char *i0,
+  void operator()(const size_t searchlen, uint16_t packed, const unsigned char *i0,
                   const unsigned char *i, const unsigned char *e,
                   size_t &maxrun, size_t &maxoffset, size_t &maxgain) {
 
@@ -187,7 +184,7 @@ struct offsets_dict_t {
 
     size_t *cb_i = cb_head;
 
-    while (1) {
+    while (true) {
 
       cb_i = prev(cb_beg, cb_end, cb_i);
 
@@ -196,11 +193,11 @@ struct offsets_dict_t {
 
       // The stored value is position + 1 to allow 0 to mean 'uninitialized
       // offset'.
-      size_t pos = *cb_i - 1;
+      const size_t pos = *cb_i - 1;
 
-      size_t offset = i - i0 - pos;
-      size_t run = substr_run(i, e, i0 + pos, e);
-      size_t gain = gains(run, offset);
+      const size_t offset = i - i0 - pos;
+      const size_t run = substr_run(i, e, i0 + pos, e);
+      const size_t gain = gains(run, offset);
 
       if (gain > maxgain) {
         maxrun = run;
@@ -246,11 +243,11 @@ struct compress_t {
 
   offsets_dict_t offsets;
 
-  compress_t(size_t searchlen = DEFAULT_SEARCHLEN,
-             size_t blocksize = DEFAULT_BLOCKSIZE)
+  explicit compress_t(const size_t searchlen = DEFAULT_SEARCHLEN,
+                      const size_t blocksize = DEFAULT_BLOCKSIZE)
       : offsets(searchlen, blocksize) {}
 
-  std::string feed(const unsigned char *i, const unsigned char *e) {
+  std::string feed(const size_t searchlen, const size_t blocksize, const unsigned char *i, const unsigned char *e) {
 
     const unsigned char *i0 = i;
 
@@ -260,9 +257,7 @@ struct compress_t {
 
     push_vlq_uint(e - i, ret);
 
-    offsets.clear();
-
-    size_t blocksize = offsets.blocksize;
+    offsets.clear(searchlen, blocksize);
 
     while (i != e) {
 
@@ -289,7 +284,7 @@ struct compress_t {
 
       pack_bytes(i, packed, blocksize);
 
-      offsets(packed, i0, i, e, maxrun, maxoffset, maxgain);
+      offsets(searchlen, packed, i0, i, e, maxrun, maxoffset, maxgain);
 
       if (maxrun < MIN_RUN) {
         unc += c;
@@ -297,10 +292,10 @@ struct compress_t {
         continue;
       }
 
-      if (unc.size() > 0) {
+      if (!unc.empty()) {
         // Write a packet of uncompressed data.
 
-        size_t msg = (unc.size() << 1) | 1;
+        const size_t msg = (unc.size() << 1) | 1;
         push_vlq_uint(msg, ret);
         ret += unc;
         unc.clear();
@@ -318,20 +313,20 @@ struct compress_t {
 
       if (maxrun < SHORTRUN_MAX) {
 
-        size_t msg = ((maxoffset << SHORTRUN_BITS) | maxrun) << 1;
+        const size_t msg = ((maxoffset << SHORTRUN_BITS) | maxrun) << 1;
         push_vlq_uint(msg, ret);
 
       } else {
 
-        size_t msg = (maxoffset << (SHORTRUN_BITS + 1));
+        const size_t msg = (maxoffset << (SHORTRUN_BITS + 1));
         push_vlq_uint(msg, ret);
         push_vlq_uint(maxrun, ret);
       }
     }
 
-    if (unc.size() > 0) {
+    if (!unc.empty()) {
 
-      size_t msg = (unc.size() << 1) | 1;
+      const size_t msg = (unc.size() << 1) | 1;
       push_vlq_uint(msg, ret);
       ret += unc;
       unc.clear();
@@ -340,11 +335,11 @@ struct compress_t {
     return ret;
   }
 
-  std::string feed(const std::string &s) {
+  std::string feed(const size_t searchlen, const size_t blocksize, const std::string &s) {
 
-    const unsigned char *i = (const unsigned char *)s.data();
+    const auto *i = reinterpret_cast<const unsigned char *>(s.data());
     const unsigned char *e = i + s.size();
-    return feed(i, e);
+    return feed(searchlen, blocksize, i, e);
   }
 };
 
@@ -373,7 +368,7 @@ struct decompress_t {
   bool pop_vlq_uint(const unsigned char *&i, const unsigned char *e,
                     size_t &res) {
 
-    while (1) {
+    while (true) {
 
       if (i == e)
         return false;
@@ -405,8 +400,8 @@ struct decompress_t {
    * The default of 0 means no sanity checking is done.
    */
 
-  decompress_t(size_t _max_size = 0)
-      : max_size(_max_size), out(NULL), outb(NULL), oute(NULL) {}
+  explicit decompress_t(const size_t _max_size = 0)
+      : max_size(_max_size), out(nullptr), outb(nullptr), oute(nullptr) {}
 
   /*
    * Inputs: the compressed string, as output from 'compress()'.
@@ -420,7 +415,7 @@ struct decompress_t {
 
   bool feed(const std::string &s, std::string &remaining) {
 
-    const unsigned char *i = (const unsigned char *)s.data();
+    const auto *i = reinterpret_cast<const unsigned char *>(s.data());
     const unsigned char *e = i + s.size();
 
     return feed(i, e, remaining);
@@ -623,16 +618,16 @@ int main(int argc, char **argv) {
     size_t searchlen = getSearchlen(fastmode);
     size_t blocksize = getBlocksize(smallmode);
 
-    compress_t compress(searchlen, blocksize);
+    compress_t compressData(searchlen, blocksize);
 
-    while (1) {
+    while (true) {
       buff.resize(BUFSIZE);
-      size_t i = ::fread((void *)buff.data(), 1, buff.size(), stdin);
+      size_t i = fread((void *)buff.data(), 1, buff.size(), stdin);
       buff.resize(i);
 
       if (i > 0) {
-        std::string out = compress.feed(buff);
-        ::fwrite(out.data(), 1, out.size(), stdout);
+        std::string out = compressData.feed(searchlen, blocksize, buff);
+        fwrite(out.data(), 1, out.size(), stdout);
       }
 
       if (i != BUFSIZE)
@@ -643,13 +638,13 @@ int main(int argc, char **argv) {
 
     std::string buff;
     buff.resize(BUFSIZE);
-    size_t buff_size = 0;
+    size_t buff_size;
 
-    decompress_t decompress;
+    decompress_t decompressData;
     std::string extra;
 
-    while (1) {
-      buff_size = ::fread((void *)buff.data(), 1, buff.size(), stdin);
+    while (true) {
+      buff_size = fread((void *)buff.data(), 1, buff.size(), stdin);
 
       if (buff_size == 0)
         break;
@@ -659,14 +654,14 @@ int main(int argc, char **argv) {
 
       while (what_size > 0) {
 
-        const unsigned char *whatd = (const unsigned char *)what->data();
-        bool done = decompress.feed(whatd, whatd + what_size, extra);
+        const auto *whatd = reinterpret_cast<const unsigned char *>(what->data());
+        bool done = decompressData.feed(whatd, whatd + what_size, extra);
 
         if (!done)
           break;
 
-        const std::string &result = decompress.result();
-        ::fwrite(result.data(), 1, result.size(), stdout);
+        const std::string &result = decompressData.result();
+        fwrite(result.data(), 1, result.size(), stdout);
 
         what = &extra;
         what_size = extra.size();
