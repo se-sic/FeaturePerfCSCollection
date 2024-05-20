@@ -1,7 +1,7 @@
 #include "fp_util/feature_cmd.h"
 #include "fp_util/sleep.h"
 
-/// Feature Interaction Case Study (Data Flow):
+/// Feature interaction case study (Data Flow):
 /// Feature F1 interacts with performance-relevant code via data flow, i.e.,
 /// data flows from code from F1 to performance-relevant code.
 

@@ -1,7 +1,7 @@
 #include "fp_util/feature_cmd.h"
 #include "fp_util/sleep.h"
 
-/// Feature Interaction Case Study (Structural):
+/// Feature interaction case study (Structural):
 /// Feature F1 interacts structurally with performance-relevant code, i.e.,
 /// code from F1 is part of a performance-relevant code region.
 

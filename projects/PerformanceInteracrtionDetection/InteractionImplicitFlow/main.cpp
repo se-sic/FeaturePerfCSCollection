@@ -1,7 +1,7 @@
 #include "fp_util/feature_cmd.h"
 #include "fp_util/sleep.h"
 
-/// Feature Interaction Case Study (Implicit Flow):
+/// Feature interaction case study (Implicit Flow):
 /// Code from F1 influences program state such that it implicitly affects data
 /// that flows to performance-relevant code.
 
