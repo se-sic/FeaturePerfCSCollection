@@ -1,0 +1,8 @@
+add_project(DegreeHigh)
+add_project(DegreeLow)
+add_project(FunctionAccumulating)
+add_project(FunctionMultiple)
+add_project(FunctionSingle)
+add_project(InteractionDataFlow)
+add_project(InteractionImplicitFlow)
+add_project(InteractionStructural)
