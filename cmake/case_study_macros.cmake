@@ -8,7 +8,7 @@ macro(ADD_PROJECT name)
   string(TOUPPER ${name} NAME)
 
   option(FPCSC_ENABLE_PROJECT_${NAME}
-         "Enable synthetic context senstivitiy cases study." OFF
+         "Enable synthetic case study ${name}." OFF
   )
 
   if(FPCSC_ENABLE_PROJECT_${NAME} OR FPCSC_ENABLE_ALL)
