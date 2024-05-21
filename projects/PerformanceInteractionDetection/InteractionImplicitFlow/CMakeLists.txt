@@ -1,5 +1,5 @@
-add_executable(InteractionImplicitFlow main.cpp)
+add_executable(InterImplicitFlow main.cpp)
 
 set_target_properties(
-    InteractionImplicitFlow PROPERTIES CXX_STANDARD 17 CXX_STANDARD_REQUIRED ON
+    InterImplicitFlow PROPERTIES CXX_STANDARD 17 CXX_STANDARD_REQUIRED ON
 )
