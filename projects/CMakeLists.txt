@@ -19,4 +19,4 @@ add_project(SynthIPRuntime)
 add_project(SynthIPTemplate)
 add_project(SynthIPTemplate2)
 
-add_subdirectory(PerformanceInteracrtionDetection)
+add_subdirectory(PerformanceInteractionDetection)
