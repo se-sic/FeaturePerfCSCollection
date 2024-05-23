@@ -9,7 +9,7 @@ bool __attribute__((feature_variable("F1"))) F1;
 
 
 int hotFunction(int t) {
-  fp_util::sleep_for_millisecs(t * 10);
+  fp_util::sleep_for_millisecs(100 + t);
   return 0;
 }
 
@@ -24,7 +24,7 @@ int main(int argc, char *argv[]) {
   }
 
   if (flag) {
-    t += 1;
+    t *= 2;
   }
 
   hotFunction(t);

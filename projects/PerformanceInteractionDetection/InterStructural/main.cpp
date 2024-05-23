@@ -10,10 +10,10 @@ bool __attribute__((feature_variable("F1"))) F1;
 
 int hotFunction(int t) {
   if (F1) {
-    t += 1;
+    t *= 2;
   }
 
-  fp_util::sleep_for_millisecs(t * 10);
+  fp_util::sleep_for_millisecs(100 + t);
   return 0;
 }
 
