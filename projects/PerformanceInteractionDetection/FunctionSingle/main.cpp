@@ -10,15 +10,15 @@ bool __attribute__((feature_variable("F3"))) F3;
 
 
 void function1(int t) {
-  fp_util::sleep_for_millisecs(t * 10);
+  fp_util::sleep_for_millisecs(1000 + t * 100);
 }
 
 void function2() {
-  fp_util::sleep_for_millisecs(10);
+  fp_util::sleep_for_millisecs(1000);
 }
 
 void function3() {
-  fp_util::sleep_for_millisecs(10);
+  fp_util::sleep_for_millisecs(1000);
 }
 
 int main(int argc, char *argv[]) {

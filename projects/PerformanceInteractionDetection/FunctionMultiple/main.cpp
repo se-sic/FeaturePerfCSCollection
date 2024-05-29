@@ -18,13 +18,13 @@ bool function1(int s) {
 
 void function2(bool b, int t) {
   if (b) {
-    fp_util::sleep_for_millisecs(10 * t);
+    fp_util::sleep_for_millisecs(t * 100);
   }
-  fp_util::sleep_for_millisecs(100);
+  fp_util::sleep_for_millisecs(1000);
 }
 
 void function3() {
-  fp_util::sleep_for_millisecs(10);
+  fp_util::sleep_for_millisecs(1000);
 }
 
 int main(int argc, char *argv[]) {

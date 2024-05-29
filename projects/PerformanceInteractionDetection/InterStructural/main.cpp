@@ -13,7 +13,7 @@ int hotFunction(int t) {
     t *= 2;
   }
 
-  fp_util::sleep_for_millisecs(100 + t);
+  fp_util::sleep_for_millisecs(5000 + t * 100);
   return 0;
 }
 
