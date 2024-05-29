@@ -19,8 +19,9 @@ bool function1(int s) {
 void function2(bool b, int t) {
   if (b) {
     fp_util::sleep_for_millisecs(t * 100);
+  } else {
+    fp_util::sleep_for_millisecs(1000);
   }
-  fp_util::sleep_for_millisecs(1000);
 }
 
 void function3() {
