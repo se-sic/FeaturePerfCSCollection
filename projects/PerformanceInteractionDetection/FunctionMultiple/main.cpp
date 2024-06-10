@@ -10,10 +10,7 @@ bool __attribute__((feature_variable("F3"))) F3;
 
 
 bool function1(int s) {
-  if (s > 10) {
-    return true;
-  }
-  return false;
+  return s > 10;
 }
 
 void function2(bool b, int t) {
