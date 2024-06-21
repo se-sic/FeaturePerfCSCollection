@@ -1,7 +1,7 @@
 add_test_binary("FeatureVirtualInheritance")
 
 add_executable(FeatureVirtualInheritance FVImain.cpp
-        ../RecursiveCalls/RC.cpp
+        ../../projects/RecursiveCalls/RC.cpp
 )
 
 set_target_properties(
