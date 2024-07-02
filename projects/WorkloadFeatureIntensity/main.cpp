@@ -7,16 +7,16 @@
 using fp_util::busy_sleep_for_millisecs;
 
 // FeatureA -- Higher intensity of same feature region with differing workloads
-bool FeatureA [[clang::feature_variable("A")]] = false;
+bool __attribute__((feature_variable("A"))) FeatureA = false;
 
 // FeatureB -- Lower intensity of same feature region with differing workloads
-bool FeatureB [[clang::feature_variable("B")]] = false;
+bool __attribute__((feature_variable("B"))) FeatureB = false;
 
 // FeatureC -- More feature regions overall but with same intensity each
-bool FeatureC [[clang::feature_variable("C")]] = false;
+bool __attribute__((feature_variable("C"))) FeatureC = false;
 
 // Mixed behaviour
-bool FeatureD [[clang::feature_variable("D")]] = false;
+bool __attribute__((feature_variable("D"))) FeatureD = false;
 
 void processStep1(unsigned workload) {
   busy_sleep_for_millisecs(100);
