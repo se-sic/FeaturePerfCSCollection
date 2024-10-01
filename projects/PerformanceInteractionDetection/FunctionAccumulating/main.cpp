@@ -30,7 +30,7 @@ int main(int argc, char *argv[]) {
   int s = 10;
   int t = 10;
 
-  fp_util::sleep_for_millisecs(5000)
+  fp_util::sleep_for_millisecs(5000);
 
   if (F1) {
     function1(r);
