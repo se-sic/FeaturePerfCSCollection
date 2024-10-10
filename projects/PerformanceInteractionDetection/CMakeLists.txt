@@ -1,3 +1,4 @@
+add_project(DegreeComplex)
 add_project(DegreeHigh)
 add_project(DegreeLow)
 add_project(FunctionAccumulating)
