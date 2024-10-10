@@ -1,8 +1,9 @@
 #include "fp_util/feature_cmd.h"
 #include "fp_util/sleep.h"
 
-/// High interaction degree case study:
-/// Regression is triggered only if all 10 features are enabled.
+/// Complex feature interaction case study:
+/// Regression is triggered only if 5 features are enabled.
+/// Regression only affects very few configurations.
 
 bool __attribute__((feature_variable("F1"))) F1;
 bool __attribute__((feature_variable("F2"))) F2;
