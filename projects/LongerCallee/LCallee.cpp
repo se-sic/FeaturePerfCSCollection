@@ -10,7 +10,7 @@
 
 long __attribute__((feature_variable("LongerCallee"))) LongerCallee;
 
-char* hellow() {
+/*char* hellow() {
   char* str[11];
 
   asm volatile (
@@ -45,6 +45,60 @@ char* hellow() {
       : "memory" // Clobbered memory
   );
   return *str;
+}*/
+
+void a() {
+  std::cout << "Function a() long nonsense begins.\n";
+
+  int x = 1;
+  for (int i = 0; i < 10; ++i) {
+    x += i * 2;
+    std::cout << "Iteration " << i << ": x = " << x << "\n";
+  }
+
+  std::vector<int> nums(15, 8);
+  for (size_t i = 0; i < nums.size(); ++i) {
+    nums[i] += i;
+    std::cout << "nums[" << i << "] = " << nums[i] << "\n";
+  }
+
+  std::string randomString = "NonsenseLoop";
+  for (int i = 0; i < 5; ++i) {
+    randomString += std::to_string(i);
+    std::cout << "Updated randomString: " << randomString << "\n";
+  }
+
+  double result = 0;
+  for (int i = 1; i <= 5; ++i) {
+    result += i * 0.5;
+    std::cout << "Partial result: " << result << "\n";
+  }
+
+  int counter = 0;
+  while (counter < 8) {
+    std::cout << "While loop nonsense, counter: " << counter << "\n";
+    counter += 2;
+  }
+
+  if (x > 20) {
+    std::cout << "X reached a nonsense threshold.\n";
+  } else {
+    std::cout << "X is still manageable nonsense.\n";
+  }
+
+  std::cout << "Performing some string operations.\n";
+  std::string str = "JustSomeText";
+  str.insert(4, "Insert");
+  std::cout << "Modified string: " << str << "\n";
+
+  for (int i = 0; i < 3; ++i) {
+    std::cout << "Nested loop nonsense: i = " << i << "\n";
+    for (int j = 0; j < 2; ++j) {
+      std::cout << "  Inner loop j = " << j << "\n";
+    }
+  }
+
+  std::cout << "End of function a() nonsense.\n";
 }
 
 
@@ -52,7 +106,7 @@ int main(int argc, char **argv) {
   LongerCallee = fp_util::getFeatureValue(argc,argv,"--call");
 
   if (LongerCallee!=0) {
-    hellow();
+    a();
   }
 
   fp_util::sleep_for_secs(2);
