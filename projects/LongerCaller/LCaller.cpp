@@ -1,6 +1,8 @@
 #include "fp_util/feature_cmd.h"
 #include "fp_util/sleep.h"
 
+#include <vector>
+
 long __attribute__((feature_variable("LongerCaller"))) LongerCaller;
 
 void a() {
