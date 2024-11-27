@@ -7,6 +7,7 @@
 
 #include <iostream>
 #include <string>
+#include <vector>
 
 long __attribute__((feature_variable("LongerCallee"))) LongerCallee;
 
