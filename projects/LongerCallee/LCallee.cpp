@@ -11,7 +11,7 @@
 
 long __attribute__((feature_variable("LongerCallee"))) LongerCallee;
 
-/*char* hellow() {
+char* hellow() {
   char* str[11];
 
   asm volatile (
@@ -46,9 +46,9 @@ long __attribute__((feature_variable("LongerCallee"))) LongerCallee;
       : "memory" // Clobbered memory
   );
   return *str;
-}*/
+}
 
-void a() {
+/*void a() {
   std::cout << "Function a() long nonsense begins.\n";
 
   int x = 1;
@@ -100,14 +100,14 @@ void a() {
   }
 
   std::cout << "End of function a() nonsense.\n";
-}
+}*/
 
 
 int main(int argc, char **argv) {
   LongerCallee = fp_util::getFeatureValue(argc,argv,"--call");
 
   if (LongerCallee!=0) {
-    a();
+    hellow();
   }
 
   fp_util::sleep_for_secs(2);
