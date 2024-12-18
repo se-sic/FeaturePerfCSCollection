@@ -12,6 +12,7 @@
 long __attribute__((feature_variable("LongerCallee"))) LongerCallee;
 
 void hellow() {
+  int MainCounter = 0;
   asm volatile("" : "+g"(MainCounter) : :);
   asm volatile("" : "+g"(MainCounter) : :);
   asm volatile("" : "+g"(MainCounter) : :);
