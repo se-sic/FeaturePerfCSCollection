@@ -5,6 +5,10 @@
 #include <string>
 
 int main(int argc, char *argv[]) {
+  using fp_util::get_memory;
+  using fp_util::free_memory;
+  using fp_util::use_memory;
+
   bool __attribute__((feature_variable("Slow"))) Slow = false;
   bool __attribute__((feature_variable("PreAlloc"))) PreAlloc = false;
   bool __attribute__((feature_variable("Header"))) Header = false;
