@@ -15,7 +15,7 @@ option(FPCSC_ENABLE_ALL
 )
 option(FPCSC_ENABLE_SRC "Enable source builds" OFF)
 
-option(FPCSC_USE_LIBCXX "Use libc++" OFF)
+option(FPCSC_USE_LIBCXX "Use libc++" ON)
 
 include_directories(external/FeaturePerfUtilities/include/)
 
